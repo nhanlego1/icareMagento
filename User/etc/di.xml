@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+ 
+    <preference for="Magento\User\Block\User\Edit\Tab\Main" type="Icare\User\Block\User\Edit\Tab\Main" />
+    <preference for="Icare\User\Api\UserApiInterface" type="Icare\User\Model\UserApi"/>
+    <preference for="Icare\User\Api\Data\UserInfoInterface" type="Icare\User\Model\UserInfo"/>
+    <preference for="Magento\User\Block\Role\Tab\Edit" type="Icare\User\Block\Role\Tab\Edit" />
+
+</config>

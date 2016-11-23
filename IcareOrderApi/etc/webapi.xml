@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:icare:module:Magento_Webapi:etc/webapi.xsd">
+
+    <!-- Managing Cart -->
+    <route url="/V6/icare/order/add" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="placeOrderV6"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/V1/icare/order/:orderId/confirm" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="confirmOrder"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/V2/icare/order/:orderId/confirm" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="confirmOrderWithPasscode"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/V2/icare/order/list" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="getOrderListV2"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+<!--     <route url="/V3/icare/order/list" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="getOrderListByUserId"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+ -->
+    <route url="/V3/icare/order/list" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="getOrderListByUserIdFromTo"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/V4/icare/order/list" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="getOrderList"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/V3/icare/order/customer/list/fromto" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="getOrderListByCustomerIdFromTo"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/V4/icare/order/customer/list" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="getOrderListByCustomerIdV4"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/V3/icare/order/detail/:orderIncrementId" method="GET">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="getOrderDetailV3"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/V1/icare/customer/order/list" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="getCustomerOrderList"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/V1/icare/order/:orderNo/:action" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="actionOrder"/>
+        <resources>
+            <!--<resource ref="Icare_IcareOrderApi::Order" />-->
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/icare/order/calculate" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="calculateOrderInfo"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+</routes>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Icare_Api::Api" title="Icare Api" sortOrder="1">
+                    <resource id="Icare_Catalog::Catalog" title="Catalog" sortOrder="1">
+                    </resource>
+                </resource>
+                <resource id="Magento_Catalog::catalog">
+                    <resource id="Icare_Catalog::product_video" title="Product Video" sortOrder="10" >
+                        <resource id="Icare_Catalog::video_upload" title="Video upload" sortOrder="10" />
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

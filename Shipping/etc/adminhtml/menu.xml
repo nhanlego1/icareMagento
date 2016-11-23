@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Icare_Shipping::sales_shipping" title="Delivery Reason" module="Icare_Shipping" sortOrder="50" parent="Magento_Sales::sales_operation" action="icare/shipping/" resource="Icare_Shipping::sales_shipping"/>
+    </menu>
+</config>

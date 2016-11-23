@@ -1,0 +1,100 @@
+<?php
+/**
+ * Copyright (c) 2016
+ * Created by: icare-baonq
+ */
+
+// @codingStandardsIgnoreFile
+?>
+
+<?php /** @var $block \Icare\Catalog\Block\Adminhtml\Product\Edit\Tab\Options */
+$renderOptions = $block->getOptions();
+
+?>
+
+<div data-bind="html: content, attr: {class: element.cssclass ? element.cssclass : 'admin__scope-old'}"
+     class="admin__scope-old">
+    <div class="fieldset-wrapper customer-information">
+        <div class="messages" style="display: none;">
+            <div class="message message-notice">
+                <div id="message_save_option"><?php /* @escapeNotVerified */ echo __('This operation can take a long time'); ?></div>
+            </div>
+        </div>
+        <div class="fieldset-wrapper-title">
+            <span class="title"><?php echo __('Product Option') ?></span>
+        </div>
+        <?php if ($block->getOptions()): ?>
+            <form id="save_option_form" action="<?php echo  $block->getUpdateProductOptionUrl()?>">
+                <input name="form_key" type="hidden" value="<?php echo $block->escapeHtml($block->getFormKey()) ?>" />
+                <input name="product_id" type="hidden" value="<?php echo $block->getCurrentProductId()?>"/>
+                <input name="store_id" type="hidden" value="<?php echo $block->getCurrentStoreId()?>"/>
+                <div class="row">
+                <table class="admin__table-secondary" style="width: 100%">
+                    <thead>
+                    <tr class="headings">
+                        <th class="col-product"><span><?php /* @escapeNotVerified */ echo __('Id') ?></span></th>
+                        <?php foreach ($renderOptions['option_title'] as $optionTitle) {?>
+                            <th class="col-price"><span><?php /* @escapeNotVerified */ echo __($optionTitle) ?></span></th>
+                        <?php }?>
+                        <th class="col-price"><?php echo __('Active') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($renderOptions['options'] as $optionTypeId => $option) {?>
+                        <tr>
+                            <td><?php echo $optionTypeId ?></td>
+                            <?php foreach ($option['option_values'] as $optionValue) {?>
+                                <td><?php /* @escapeNotVerified */ echo __($optionValue) ?></td>
+                            <?php }?>
+                            <td><input name="option_active[<?php echo $optionTypeId?>]" type="checkbox" class="checkbox" <?php echo $option['active'] == 1? 'checked="checked"': '' ?>" /></td>
+                        </tr>
+                    <?php }?>
+                    </tbody>
+                </table>
+                </div>
+                <div class="row">
+                    <div class="add-video-button-container">
+                        <button id="save_option_button" title="save" type="button" class="action-secondary">
+                            <span>Save Option</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        <?php else: ?>
+            <p><?php echo __('There is no product option.') ?></p>
+        <?php endif; ?>
+
+
+    </div>
+</div>
+
+<script>
+require(['jquery'], function($){
+    $('#save_option_button').click(function(e) {
+        this._form =  $('#save_option_form');
+        $.ajax({
+            url: this._form.prop('action'),
+            type: 'post',
+            data: this._form.serialize(),
+            dataType: 'json',
+            context: this,
+            beforeSend: function () {
+                $('body').trigger('processStart');
+            },
+            success: function (data) {
+                $('#message_save_option').html(data['message']);
+                $('.messages').show();
+            },
+            error: function (jqXHR, status, error) {
+                alert({
+                    content: $.mage.__('Sorry, something went wrong. Please try again later.')
+                });
+                window.console && console.log(status + ': ' + error + "\nResponse text:\n" + jqXHR.responseText);
+            },
+            complete: function () {
+                $('body').trigger('processStop');
+            }
+        });
+    });
+});
+</script>

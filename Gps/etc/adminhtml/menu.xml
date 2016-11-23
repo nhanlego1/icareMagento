@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Icare_Gps::sales_gps" title="Field sale location" module="Icare_Gps" sortOrder="50" parent="Magento_Sales::sales_operation" action="icare/gps/" resource="Icare_Gps::sales_gps"/>
+    </menu>
+</config>

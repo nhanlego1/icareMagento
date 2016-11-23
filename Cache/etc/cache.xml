@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+    <type name="Icare_Cache" instance="Icare\Cache\Model\IcareCache">
+        <label>ICare Cache</label>
+        <description>Icare Code</description>
+    </type>
+</config>

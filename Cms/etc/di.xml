@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+ 
+    <preference for="Magento\Cms\Block\Adminhtml\Page\Edit\Tab\Main" type="Icare\Cms\Block\Adminhtml\Page\Edit\Tab\Main" />
+    <!--<preference for="Magento\Cms\Model\ResourceModel\Page" type="Icare\Cms\Model\ResourceModel\Page" />-->
+    <preference for="Magento\Cms\Controller\Adminhtml\Page\Save" type="Icare\Cms\Controller\Adminhtml\Page\Save" />
+    <preference for="Icare\Cms\Api\PageInterface" type="Icare\Cms\Model\Page"/>
+
+    <virtualType name="VariablesGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="VariablesGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Icare\Cms\Model\Resource\Variables\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">VariablesGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Icare\Cms\Model\ResourceModel\Variables\Grid\Collection" type="Icare\Cms\Model\ResourceModel\Variables\Grid\Grid">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">variable</argument>
+            <argument name="resourceModel" xsi:type="string">Icare\Cms\Model\ResourceModel\Variables</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="icare_variables_listing_data_source" xsi:type="string">Icare\Cms\Model\ResourceModel\Variables\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+
+</config>

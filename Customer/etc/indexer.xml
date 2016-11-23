@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="customer_grid" view_id="dummy" class="Magento\Framework\Indexer\Action\Entity" primary="customer">
+        <fieldset name="customer" source="Magento\Customer\Model\ResourceModel\Customer\Collection"
+                  provider="Magento\Customer\Model\Indexer\AttributeProvider">
+            <field name="social_id" xsi:type="filterable" dataType="varchar"/>
+            <field name="credit_limit" xsi:type="filterable" dataType="varchar"/>
+            <field name="due_limit" xsi:type="filterable" dataType="varchar"/>
+            <field name="client_id" xsi:type="filterable" dataType="int"/>
+            <field name="telephone" xsi:type="filterable" dataType="varchar"/>
+            <field name="organization_id" xsi:type="filterable" dataType="varchar"/>
+            <field name="icare_center_type" xsi:type="filterable" dataType="int"/>
+            <field name="store_id" xsi:type="filterable" dataType="int"/>
+        </fieldset>
+    </indexer>
+</config>

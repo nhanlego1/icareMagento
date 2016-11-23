@@ -1,0 +1,23 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: nhan
+ * Date: 10/24/16
+ * Time: 3:07 PM
+ */
+$gps = $block->getLatlong();
+?>
+
+<div class="admin__page-section-title">
+        <span class="title"><?php echo __('Field Sales Confirmed Location.') ?></span>
+        <span style="float: right;" class="title"><a href="<?php print $block->getUrlIndex() ?>"><?php echo __('<< Return to Field Sales Location List') ?></a></span>
+</div>
+
+<iframe
+    width="800"
+    height="500"
+    frameborder="0" style="border:0"
+    src="https://www.google.com/maps/embed/v1/place?key=<?php echo $block->getGoogleApiKey(); ?>
+    &q=<?php echo $gps['lat'] ?>,<?php echo $gps['long'] ?>&center=<?php echo $gps['lat'] ?>,<?php echo $gps['long'] ?>"
+    allowfullscreen>
+</iframe>

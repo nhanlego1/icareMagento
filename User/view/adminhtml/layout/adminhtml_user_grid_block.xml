@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:icare:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="permission.user.grid.columnSet">
+            <block class="Magento\Backend\Block\Widget\Grid\Column\Multistore" as="store_id">
+                <arguments>
+                    <argument name="header" xsi:type="string" translate="true">Store</argument>
+                    <argument name="width" xsi:type="string">100px</argument>
+                    <argument name="type" xsi:type="string">store</argument>
+                    <argument name="store_view" xsi:type="string">1</argument>
+                    <argument name="sortable" xsi:type="string">0</argument>
+                    <argument name="index" xsi:type="string">store_id</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

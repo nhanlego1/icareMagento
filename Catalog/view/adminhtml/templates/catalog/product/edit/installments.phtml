@@ -1,0 +1,109 @@
+<?php
+/**
+ * Copyright (c) 2016
+ * Created by: icare-baonq
+ */
+
+// @codingStandardsIgnoreFile
+/**
+ * @var \Icare\Catalog\Block\Adminhtml\Product\Edit\Tab\Installments $block
+ */
+if ($block->isAllStoreViews()) {
+    $disabled = 'disabled';
+} else {
+    $disabled = '';
+}
+?>
+<fieldset id="grop_fields" class="fieldset">
+    <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Installments In Product') ?></span></legend>
+    <br>
+    <?php if ($block->getProductId()): ?>
+    <div class="messages">
+    </div>
+    <?php endif; ?>
+    <div class="store-scope">
+        <div class="store-tree">
+            <?php $_selectedInstallmens = $block->getSelectedInstallments()?>
+            <?php $_websites = $block->getWebsiteCollection() ?>
+            <?php foreach ($_websites as $_website): ?>
+            <div class="website-name">
+                <label for="product_website_<?php /* @escapeNotVerified */ echo $_website->getId() ?>"><?php echo $block->escapeHtml($_website->getName()) ?></label>
+            </div>
+            <dl class="webiste-groups" id="product_website_<?php /* @escapeNotVerified */ echo $_website->getId() ?>_data">
+                <?php foreach ($block->getGroupCollection($_website) as $_group): ?>
+                    <dt><?php echo $block->escapeHtml($_group->getName()) ?></dt>
+                    <dd>
+                        <ul>
+                            <?php foreach ($block->getStoreCollection($_group) as $_store): ?>
+                                <?php if ($block->getCurrentStoreId() && $block->getCurrentStoreId()  !== $_store->getId()) {
+                                    continue;
+                                }?>
+                                <li>
+                                    <?php echo $block->escapeHtml($_store->getName()) ?>
+                                                <table class="admin__table-secondary">
+                                                    <thead>
+                                                    <tr class="headings">
+                                                        <th class="col-product"><span><?php /* @escapeNotVerified */ echo __('Installment Id') ?></span></th>
+                                                        <th class="col-product"><span><?php /* @escapeNotVerified */ echo __('Title') ?></span></th>
+                                                        <th class="col-product"><span><?php /* @escapeNotVerified */ echo __('Number Of Repayment') ?></span></th>
+                                                        <th class="col-price"><?php echo __('Active') ?></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php foreach($block->getAvailableInstallments() as $_installment): ?>
+
+                                                        <tr>
+                                                            <td><?php echo $_installment->getId()?></td>
+                                                            <td><?php echo $_installment->getTitle()?></td>
+                                                            <td><?php echo $_installment->getNumberOfRepayment()?></td>
+                                                            <?php if (isset($_selectedInstallmens[$_store->getId()][$_installment->getId()]) && $_selectedInstallmens[$_store->getId()][$_installment->getId()]) { ?>
+                                                            <td><input name="product[installments][<?php echo $_store->getId() ?>][]" value="<?php echo $_installment->getId()?>" required type="radio" class="radio" checked="checked" <?php echo $disabled ?> /></td>
+                                                            <?php } else {?>
+                                                                <td><input name="product[installments][<?php echo $_store->getId() ?>][]" value="<?php echo $_installment->getId()?>" required type="radio" class="radio" <?php echo $disabled ?> /></td>
+                                                            <?php }?>
+                                                        </tr>
+                                                    <?php endforeach;?>
+                                                    </tbody>
+                                                </table>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </dd>
+                <?php endforeach; ?>
+            </dl>
+            <?php endforeach;?>
+        </div>
+    </div>
+</fieldset>
+
+<script>
+require(["prototype"], function(){
+
+    //<![CDATA[
+    var productWebsiteCheckboxes = $$('.website-checkbox');
+
+    for (var i = 0; i < productWebsiteCheckboxes.length; i++) {
+        Event.observe(productWebsiteCheckboxes[i], 'click', toggleStoreFromChoosers);
+    }
+
+    function toggleStoreFromChoosers(event) {
+        var element = Event.element(event);
+        var selects = $('product_website_' + element.value + '_data').getElementsBySelector('select');
+        var selectBlocks = $('product_website_' + element.value + '_data').getElementsByClassName('website-' + element.value + '-select');
+        for (var i = 0; i < selects.length; i++) {
+            selects[i].disabled = !element.checked;
+        }
+        for (var i = 0; i < selectBlocks.length; i++) {
+            if (element.checked) {
+                selectBlocks[i].show();
+            }
+            else {
+                selectBlocks[i].hide();
+            }
+        }
+    }
+    window.toggleStoreFromChoosers = toggleStoreFromChoosers;
+    //]]>
+
+});
+</script>

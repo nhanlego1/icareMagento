@@ -1,0 +1,11 @@
+# STAGING ENVIRONMENT
+AccountId,4517458_SB2
+OauthToken,56a90ccf596d9669a4abee21f72100454a428b6515184c05ef125c180f14db56
+OauthTokenSecret,bfc9c0763094513d3407bbfe19134a350cde253f95eddc54b095e60c7b405817
+OauthConsumerKey,72047c7ed2d78852e00e4de31086746a8e4bf218bbf91fa16d8837cfa857a150
+OauthConsumerSecret,90ccfa589624c53b03c059c609c90234b580b31646d420df4d741d84708fdfa1
+TimeoutInSecs,60
+UrlHelloApi,"https://rest.eu1.netsuite.com/app/site/hosting/restlet.nl?script=275&deploy=1"
+UrlOrderApi,"https://rest.eu1.netsuite.com/app/site/hosting/restlet.nl?script=275&deploy=1"
+
+

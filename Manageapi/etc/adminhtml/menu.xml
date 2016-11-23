@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Icare_Manageapi::system_manageapis" title="Icare Manage Api" module="Icare_Manageapi" sortOrder="50" parent="Magento_Backend::system_other_settings" action="icare/manageapi/" resource="Icare_Manageapi::system_manageapi"/>
+    </menu>
+</config>

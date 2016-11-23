@@ -1,0 +1,23 @@
+<?php if ($block->getCapture() && !in_array($block->getOrder()->getStatus(), $block->arrStatus())): ?>
+	<?php $capture = $block->getCapture(); ?>
+    <div class="admin__page-section-title">
+    	<?php if ($capture['is_icaremember_confirm'] == 1) {?>
+        	<span class="title"><?php echo __('iCare Member Confirmed Location.') ?></span>
+        <?php } else {?>
+        	<span class="title"><?php echo __('Field Sale Confirmed Location.') ?></span>
+        <?php }?>
+    </div>
+    
+    <iframe
+        width="600"
+        height="450"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key=<?php echo $block->getGoogleApiKey(); ?>
+    &q=<?php echo $capture['lat'] ?>,<?php echo $capture['long'] ?>&center=<?php echo $capture['lat'] ?>,<?php echo $capture['long'] ?>"
+        allowfullscreen>
+    </iframe>
+<?php else: ?>
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo __('We can not capture location.') ?></span>
+    </div>
+<?php endif; ?>

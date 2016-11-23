@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Icare\Sales\Block\Adminhtml\Order\Create\Store" template="Magento_Sales::order/create/abstract.phtml" name="store">
+                <block class="Magento\Sales\Block\Adminhtml\Order\Create\Store\Select" template="order/create/store/select.phtml" name="select"/>
+            </block>
+        </referenceContainer>
+    </body>
+</layout>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:icare:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/icare/variable" method="POST">
+        <service class="Icare\Variable\Api\VariableInterface" method="retrieveVariables"/>
+        <resources>
+            <resource ref="Icare_Variable::variable"/>
+        </resources>
+    </route>
+    <route url="/V1/icare/variable/search_by_code" method="POST">
+        <service class="Icare\Variable\Api\VariableInterface" method="getListByCode"/>
+        <resources>
+            <resource ref="Icare_Variable::variable"/>
+        </resources>
+    </route>
+</routes>

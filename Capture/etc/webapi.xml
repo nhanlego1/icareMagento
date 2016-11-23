@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:icare:module:Magento_Webapi:etc/webapi.xsd">
+
+    <!-- Managing Cart -->
+    <route url="/V1/icare/customer/capture/add" method="POST">
+        <service class="Icare\Capture\Api\CaptureInterface" method="addCustomer"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+
+    </route>
+
+    <route url="/V1/icare/customer/capture/:customerId" method="GET">
+        <service class="Icare\Capture\Api\CaptureInterface" method="customerInfo"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    <route url="/V1/icare/order/capture/:orderId" method="GET">
+        <service class="Icare\Capture\Api\CaptureInterface" method="orderInfo"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+
+</routes>

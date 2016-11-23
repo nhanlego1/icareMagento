@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/Event/etc/events.xsd">
+    <event name="helpdesk_ticket_delete_before">
+        <observer name="icare_eventhelpdesk_notify_before_delete" instance="Icare\Helpdesk\Observer\HelpdeskTicketBeforeDelete" />
+    </event>
+    <event name="helpdesk_ticket_prepare_save">
+        <observer name="icare_eventhelpdesk_prepare_save" instance="Icare\Helpdesk\Observer\HelpdeskTicketPrepareSave" />
+    </event>
+</config>

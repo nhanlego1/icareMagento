@@ -1,0 +1,96 @@
+<?php
+/**
+ * Copyright © 2016 by Mobivi.
+ * Created by Long Nguyen.
+ * User: longnguyen
+ * Date: 27/09/2016
+ * Time: 11:49
+ */
+
+?>
+<span class="title" style="    font-size: 18px;    font-weight: 600;    margin-top: 10px;    display: inline-block;">
+    <?=__('Saving account')?>
+</span>
+
+<div class="saving_account_info" style="margin-top: 10px;padding:5px">
+    <?php
+    $account = $block->getSavingAccount();
+    $status = $block->getDbSavingAccount();
+    if($account):
+    ?>
+            <style>
+                label.sv-info-label {
+                    width: 200px;
+                    display: inline-block;
+                }
+                .saving_account_info ul li {
+                    margin-bottom: 10px;
+                    border-bottom: 1px #d8d8d8 dotted;
+                    margin-left: 20px;
+                }
+            </style>
+        <div class="admin__field admin__field-option field-saving_account-confirmation">
+            <input  type="checkbox" <?=$status['used']?'checked':''?>  id="use_saving_account" name="order[saving_account]" class="admin__control-checkbox">
+            <label for="use_saving_account" class="admin__field-label"><?=__('Use Saving Account for this order')?></label>
+        </div>
+
+        <div id="saving_account_info" style="<?=$status['used']?'':'display: none'?>">
+            <div class="admin__field admin__field-option field-saving_account-confirmation">
+                <label class="admin__field-label"><?=__('Total amount')?></label>
+
+                <input style="width: 200px;" type="number" value="<?=$status['used']?$status['amount']:$account->summary->accountBalance?>" max="<?=$status['used']?$account->summary->accountBalance+$status['amount']:$account->summary->accountBalance?>" min="0"   name="order[saving_account_amount]"   class="admin__control-textbox">
+
+            </div>
+            <ul style="margin-top: 25px">
+                <li>
+                    <label class="sv-info-label">
+                        <?=__('Account No.')?>
+                    </label>
+                    <strong><?=$account->accountNo?></strong>
+                </li>
+                <li>
+                    <label class="sv-info-label">
+                        <?=__('Client name')?>
+                    </label>
+                    <strong><?=$account->clientName?></strong>
+                </li>
+                <li>
+                    <label class="sv-info-label">
+                        <?=__('Saving product name')?>
+                    </label>
+                    <strong><?=$account->savingsProductName?></strong>
+                </li>
+                <li>
+                    <label class="sv-info-label">
+                        <?=__('Status')?>
+                    </label>
+                    <strong><?=$account->status->value?></strong>
+                </li>
+                <li>
+                    <label class="sv-info-label">
+                        <?=__('Account balance')?>
+                    </label>
+                    <strong><?=$account->summary->accountBalance?> (<?=$account->summary->currency->code?>)</strong>
+                </li>
+            </ul>
+        </div>
+    <?php else:?>
+        <?=__("There is no account found");?>
+    <?php endif;?>
+</div>
+<script language="javascript">
+    require(['jquery'],
+            function($) {
+                $(document).ready(function(){
+                    $("#use_saving_account").on('change',function(e){
+                        if($(this).is(':checked')){
+                            $('#saving_account_info').fadeIn();
+                        }
+                        else{
+                            $("#saving_account_info").hide();
+                        }
+                    });
+                });
+            });
+    
+</script>

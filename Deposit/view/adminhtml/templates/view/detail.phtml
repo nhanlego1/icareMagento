@@ -1,0 +1,48 @@
+<?php
+
+?>
+<div id="icare_deposit_view">
+    
+</div>
+<div id="payment-ajax-detail"></div>
+<script>
+    require(
+            [
+                'jquery',
+                'Magento_Ui/js/modal/modal'
+            ],
+            function(
+                    $,
+                    modal
+            ) {
+                var options = {
+                    type: 'popup',
+                    responsive: true,
+                    innerScroll: true,
+                    title: 'Payment detail',
+
+                    buttons: [{
+                        text: $.mage.__('Close'),
+                        class: '',
+                        click: function () {
+                            this.closeModal();
+                        }
+                    }]
+                };
+                $(document).on('click','#icare_deposit_view_tabs_deposit_history_tab_content a.action-menu-item',function(){
+                    var detail_url = $(this).attr('href');
+                    $.ajax({
+                        showLoader: true,
+                        url: detail_url,
+                        data: {},
+                        type: "GET",
+                        dataType: 'html'
+                    }).done(function (data) {
+                        $("#payment-ajax-detail").html(data).modal(options).modal('openModal');
+                    });
+
+                    return false;
+                });
+            }
+    );
+</script>

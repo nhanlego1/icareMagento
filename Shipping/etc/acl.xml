@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Sales::sales">
+                    <resource id="Icare_Shipping::sales_shipping" title="Delivery Reason" sortOrder="10" >
+                        <resource id="Icare_Shipping::shipping" title="iCare Delivery Reason" sortOrder="40">
+                            <resource id="Icare_Shipping::save" title="Save Reason" sortOrder="10" />
+                            <resource id="Icare_Shipping::shipping_delete" title="Delete Reason" sortOrder="20" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

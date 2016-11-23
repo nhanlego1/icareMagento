@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 iCare Benefits. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="billing_method">
+            <block  name="order_saving_account" as="saving_account"
+                   class="Icare\Sales\Block\Adminhtml\Order\Create\SavingAccount"
+                   template="order/create/savingaccount.phtml"></block>
+        </referenceBlock>
+        <referenceBlock name="billing_method">
+            <block before="totals"  class="Icare\Sales\Block\Adminhtml\Order\Create\AutoConfirmation" template="order/create/autoconfirmation.phtml" name="autoconfirmation"></block>
+        </referenceBlock>
+    </body>
+</page>

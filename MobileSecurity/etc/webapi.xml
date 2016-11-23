@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ * Created by Long Nguyen
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:icare:module:Magento_Webapi:etc/webapi.xsd">
+
+    <!--Security actions-->
+    <route url="/V1/icare/m/security/auth" method="POST">
+        <service class="Icare\MobileSecurity\Api\AuthenticateInterface" method="authenticate"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+    <!--Register Actions-->
+    <route url="/V1/icare/m/security/register" method="POST">
+        <service class="Icare\MobileSecurity\Api\RegisterInterface" method="register"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+    <route url="/V1/icare/m/security/update" method="POST">
+        <service class="Icare\MobileSecurity\Api\RegisterInterface" method="update"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+    <route url="/V1/icare/m/security/reset" method="POST">
+        <service class="Icare\MobileSecurity\Api\RegisterInterface" method="reset"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+    <!--api generate token-->
+    <route url="/V1/icare/m/token/generate" method="POST">
+        <service class="Icare\MobileSecurity\Api\AuthenticateInterface" method="generateToken"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+    <!--api access token-->
+    <route url="/V1/icare/m/token/access" method="POST">
+        <service class="Icare\MobileSecurity\Api\AuthenticateInterface" method="accessToken"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+</routes>

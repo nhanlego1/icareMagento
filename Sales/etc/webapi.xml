@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:icare:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/icare/order/history/:orderId" method="GET">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="historyOrder"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+
+    <route url="/V1/icare/order/address/shipping" method="POST">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="shippingAddressOrder"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/V1/icare/customer/address/shipping" method="POST">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="shippingAddressCustomerAdd"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/V1/icare/customer/shipping/:orderId" method="GET">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="shippingAddressCustomer"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+    <route url="/V1/icare/shipping/customer/:customerId" method="GET">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="customerShippingAddress"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/V1/icare/preorder/tracking" method="POST">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="preorderTracking"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+</routes>

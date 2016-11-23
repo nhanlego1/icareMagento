@@ -1,0 +1,203 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<style type="text/css">
+    /**
+ * Copyright Â© 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+    .mb-ticket-general .page-columns .mage-suggest-dropdown li span {
+        margin-left: 0;
+        display: block;
+    }
+
+    .mb-ticket-general .page-columns .side-col {
+        margin-left: 10px;
+    }
+
+    .mb-ticket-general .page-columns .side-col legend,
+    .mb-ticket-general .page-columns .main-col legend {
+        margin-bottom: 2rem;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .mb-ticket-general .page-columns .side-col .admin__field-control {
+        width: 90%;
+        margin-left: 0;
+    }
+
+    .mb-ticket-general .page-columns .side-col .label.admin__field-label {
+        width: 90%;
+        margin-left: 0;
+    }
+
+    .mb-ticket-general .page-columns .side-col .admin__field-label {
+        text-align: left;
+        padding-left: 4px !important;
+    }
+
+    .mb-ticket-general .page-columns .side-col .admin__control-select {
+        width: 100%;
+    }
+
+    .mb-ticket-general .main-col .mb-message-header {
+        margin: 0px 0px 5px 2px;
+    }
+
+    .mb-ticket-general .main-col .mb-message-header .major {
+        font-size: 14px;
+    }
+
+    .mb-ticket-general .main-col .mb-message-header .minor {
+        color: #adadad;
+        margin-left: 1.5rem;
+    }
+
+    .mb-message-content {
+        margin: 0 0 5px 3px;
+        background: #ecfaff;
+        border-left: 3px solid #4b8dcb;
+        padding: 1rem 1.5rem;
+    }
+
+    .mb-message-content.staff {
+        background: #DEFFE0;
+        border-left: 3px solid #008212;
+    }
+
+    .mb-message-attachments {
+        padding-left: 5px;
+    }
+
+    .mb-message-attachments .attached-file-item {
+        display: block;
+        padding: 2px 0;
+    }
+
+    .ticket-wrapper {
+        border-bottom: 1px solid #000000;
+        padding-bottom: 20px;
+        margin-bottom: 10px;
+    }
+
+    #loadMore {
+        cursor: pointer;
+        background: #0a6c9f;
+        padding: 10px;
+        text-align: center;
+        width: 100px;
+        color: #ffffff;
+    }
+
+    .replyticket {
+        cursor: pointer;
+        background: #0a6767;
+        padding: 10px;
+        text-align: center;
+        width: 100px;
+        color: #ffffff;
+        float: right;
+    }
+
+    .reply-ticket {
+        color: #ffffff;
+    }
+
+</style>
+<div class="admin__page-section-title">
+    <span class="title"><?php echo __('Ticket Information') ?></span>
+</div>
+<?php if ($block->getTicketByOrderId()): ?>
+    <?php foreach ($block->getTicketByOrderId() as $ticket): ?>
+        <div class="entry-edit form-inline ticket-wrapper">
+            <fieldset class="fieldset admin__fieldset " id="ticket_base_fieldset">
+                <legend class="admin__legend legend">
+                    <span><?php echo $ticket->getTitle() ?></span>
+                </legend>
+                <br>
+                <?php $messages = $block->getHistoryMessages($ticket->getTicketId()); ?>
+                <?php if (count($messages)): ?>
+                    <ul class="note-list ticket-element-<?php echo $ticket->getTicketId() ?>">
+                        <?php foreach ($messages as $message): ?>
+                            <li>
+                                <div class="mb-message-header">
+                                    <strong class="major"><?php echo $message->getReplierName() ?></strong>
+                                    <span
+                                        class="minor"><?php echo $block->formatMessageDate($message->getCreateTime()) ?></span>
+                                </div>
+                                <div class="mb-message-content<?php echo $message->getIsStaff() ? ' staff' : ''; ?>">
+                                    <?php if ($message->getMessage()): ?>
+                                        <?php echo htmlspecialchars_decode($message->getMessage()); ?>
+                                    <?php endif; ?>
+                                </div>
+                                <?php $attachments = $block->getAttachments($message->getId()); ?>
+                                <?php if (count($attachments)): ?>
+                                    <div class="mb-message-attachments">
+                                        <?php foreach ($attachments as $attachment): ?>
+                                            <?php if(strpos($block->getDownloadFileUrl($attachment),'jpeg') !== false ||
+                                                strpos($block->getDownloadFileUrl($attachment), 'jpg') !== false ||
+                                                strpos($block->getDownloadFileUrl($attachment), 'png') !== false ||
+                                                strpos($block->getDownloadFileUrl($attachment), 'gif') !== false
+                                            ): ?>
+                                                <span class="attached-file-item"><a
+                                                        href="<?php echo $block->getDownloadFileUrl($attachment); ?>"
+                                                        title="Download File">
+                                                        <img width="600px" height="auto" src="<?php echo $block->getDownloadFileUrl($attachment); ?>"/>
+                                                    </a>
+                                                    </span>
+
+                                                <?php else: ?>
+                                            <span class="attached-file-item"><a
+                                                    href="<?php echo $block->getDownloadFileUrl($attachment); ?>"
+                                                    title="Download File"><?php echo $attachment->getFilename(); ?></a></span>
+                                                <?php endif;?>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </li>
+                        <?php endforeach; ?>
+                        <div id="loadMore"><?php echo __('Load more') ?></div>
+                    </ul>
+
+                    <div class="replyticket"><a class="reply-ticket"
+                                                href="<?php echo $block->getHref($ticket->getTicketId()) ?>"><?php echo __('Reply ticket') ?></a>
+                    </div>
+                <?php else: ?>
+                    <p class="note-msg"><?php echo __('There is no message posted for this ticket.') ?></p>
+                <?php endif; ?>
+                <div class="clear" style="clear:both;">&nbsp;</div>
+            </fieldset>
+        </div>
+        <script>
+            require([
+                'jquery'
+            ], function ($) {
+                $(".ticket-element-<?php echo $ticket->getTicketId() ?> li").hide();
+                size_li_<?php echo $ticket->getTicketId() ?> = $(".ticket-element-<?php echo $ticket->getTicketId() ?> li").size();
+                x = 5;
+                if (size_li_<?php echo $ticket->getTicketId() ?> <= x) {
+                    $('.ticket-element-<?php echo $ticket->getTicketId() ?> #loadMore').hide();
+                }
+                $('.ticket-element-<?php echo $ticket->getTicketId() ?> li:lt(' + x + ')').show();
+
+                $('.ticket-element-<?php echo $ticket->getTicketId() ?> #loadMore').click(function () {
+                    x = (x + 5 <= size_li_<?php echo $ticket->getTicketId() ?>) ? x + 5 : size_li_<?php echo $ticket->getTicketId() ?>;
+                    $('.ticket-element-<?php echo $ticket->getTicketId() ?> li:lt(' + x + ')').show();
+                    if ((size_li_<?php echo $ticket->getTicketId() ?> - x) <= 0) {
+                        $(this).hide();
+                    }
+                });
+            });
+        </script>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p class="note-msg"><?php echo __('There is no ticket posted for this order.') ?></p>
+<?php endif; ?>
+

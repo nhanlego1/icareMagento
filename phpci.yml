@@ -1,0 +1,11 @@
+test:
+    php_mess_detector:
+        path: "."
+        allowed_warnings: -1
+        rules:
+             - "phpmd-ruleset.xml"
+    php_code_sniffer:
+        path: "."
+        standard: "phpcs-ruleset.xml"
+        allowed_errors: 0
+        allowed_warnings: -1

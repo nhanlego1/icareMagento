@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:icare:framework:ObjectManager/etc/config.xsd">
+    <preference 
+    	for="Magento\Framework\Acl\AclResource\Provider" 
+    	type="Icare\Variable\Model\AclResourceProvider" />
+    	
+    <preference 
+    	for="Icare\Variable\Api\VariableInterface" 
+    	type="Icare\Variable\Model\Variable" />
+</config>

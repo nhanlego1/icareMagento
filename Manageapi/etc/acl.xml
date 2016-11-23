@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::system">
+                    <resource id="Icare_Manageapi::system_manageapi" title="Manage Api" sortOrder="10" >
+                        <resource id="Icare_Manageapi::manageapi" title="iCare Manage Api" sortOrder="40">
+                            <resource id="Icare_Manageapi::save" title="Save iCare Manage Api" sortOrder="10" />
+                            <resource id="Icare_Manageapi::delete" title="Delete iCare Manage Api" sortOrder="20" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

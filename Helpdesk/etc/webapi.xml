@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:icare:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/icare/helpdesk/customer/:customerId" method="GET">
+        <service class="Icare\Helpdesk\Api\HelpdeskInterface" method="getListByCustomer"/>
+        <resources>
+            <resource ref="Icare_Helpdesk::Helpdesk"/>
+        </resources>
+    </route>
+
+    <route url="/V1/icare/helpdesk/order/:orderId" method="GET">
+        <service class="Icare\Helpdesk\Api\HelpdeskInterface" method="getListByOrder"/>
+        <resources>
+            <resource ref="Icare_Helpdesk::Helpdesk"/>
+        </resources>
+    </route>
+
+    <route url="/V1/icare/helpdesk/ticket/:ticketId" method="GET">
+        <service class="Icare\Helpdesk\Api\HelpdeskInterface" method="getTicket"/>
+        <resources>
+            <resource ref="Icare_Helpdesk::Helpdesk"/>
+        </resources>
+    </route>
+
+    <route url="/V1/icare/helpdesk/user/:userId" method="GET">
+        <service class="Icare\Helpdesk\Api\HelpdeskInterface" method="getListByUser"/>
+        <resources>
+            <resource ref="Icare_Helpdesk::Helpdesk"/>
+        </resources>
+    </route>
+
+    <route url="/V2/icare/helpdesk/ticket/create" method="POST">
+        <service class="Icare\Helpdesk\Api\HelpdeskInterface" method="submitTicketV2"/>
+        <resources>
+            <resource ref="Icare_Helpdesk::Helpdesk"/>
+        </resources>
+    </route>
+
+    <route url="/V2/icare/helpdesk/ticket/reply" method="POST">
+        <service class="Icare\Helpdesk\Api\HelpdeskInterface" method="submitTicketReplyV2"/>
+        <resources>
+            <resource ref="Icare_Helpdesk::Helpdesk"/>
+        </resources>
+    </route>
+
+</routes>

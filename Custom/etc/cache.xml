@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+    <type name="icare_customer_product_order" instance="Magento\Framework\App\Cache\Type\Config">
+        <label>Icare Product Customer Order Caching</label>
+        <description>Cache Product, order, customer before load.</description>
+    </type>
+</config>

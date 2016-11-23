@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:icare:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/icare/product/contentofweek/:storeId" method="GET">
+        <service class="Icare\Catalog\Api\ProductInterface" method="getContentOfWeek"/>
+        <resources>
+            <resource ref="Icare_Catalog::Catalog"/>
+        </resources>
+    </route>
+    
+    <route url="/V1/icare/product/saveNetSuiteProduct" method="POST">
+    	<service class="Icare\Catalog\Api\ProductInterface" method="saveNetSuiteProduct"/>
+    	<!-- Wait for Oauth module implementation -->
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/icare/product/bestseller" method="POST">
+        <service class="Icare\Catalog\Api\ProductInterface" method="getBestSeller"/>
+        <resources>
+            <resource ref="Icare_Catalog::Catalog" />
+        </resources>
+    </route>
+
+    <route url="/V1/icare/product/newlist" method="POST">
+        <service class="Icare\Catalog\Api\ProductInterface" method="getNewestProduct"/>
+        <resources>
+            <resource ref="Icare_Catalog::Catalog"/>
+        </resources>
+    </route>
+</routes>

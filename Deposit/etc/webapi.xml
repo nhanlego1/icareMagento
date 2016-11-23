@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: nhan_nguyen
+  -->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:icare:module:Magento_Webapi:etc/webapi.xsd">
+
+    <!-- Deposit Report -->
+    <route url="/V1/icare/deposit/search_by_user" method="POST">
+        <service class="Icare\Deposit\Api\DepositApiInterface" method="getListByUser"/>
+        <resources>
+            <resource ref="Icare_Deposit::Deposit"/>
+        </resources>
+    </route>
+
+</routes>

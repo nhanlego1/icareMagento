@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Icare\Catalog\Api\ProductInterface" type="Icare\Catalog\Model\Product"/>
+    <preference for="Magento\Catalog\Ui\DataProvider\Product\ProductDataProvider" type="Icare\Catalog\Ui\DataProvider\Product\ProductDataProvider"/>
+    <preference for="Magento\Backend\Block\Store\Switcher" type="Icare\Catalog\Block\Adminhtml\Store\Switcher"/>
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Websites" type="Icare\Catalog\Block\Adminhtml\Product\Edit\Tab\Websites"/>
+    <preference for="Icare\Catalog\Api\Data\BestsellerSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <type name="Magento\Catalog\Model\Product\Option">
+        <plugin name="Icare_EventOrder" type="Icare\Catalog\Plugin\OptionPlugin"  />
+    </type>
+    <!--<preference for ="Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Options\Option" type="Icare\Catalog\Block\Adminhtml\Product\Edit\Tab\Options\Option"/>-->
+    <preference for ="Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Options" type="Icare\Catalog\Block\Adminhtml\Product\Edit\Tab\Options"/>
+
+	<preference for="Icare\Catalog\Api\Data\NetSuiteProductInterface" type="Icare\Catalog\Model\NetSuiteProduct" />
+	<preference for="Icare\Catalog\Api\Data\NetSuiteProductOptionInterface" type="Icare\Catalog\Model\NetSuiteProductOption" />
+
+    <preference for ="Magento\Catalog\Block\Adminhtml\Product\Edit\Tabs" type="Icare\Catalog\Block\Adminhtml\Product\Edit\Tabs"/>
+
+    <preference for ="Magento\Catalog\Controller\Adminhtml\Product\Save" type="Icare\Catalog\Controller\Adminhtml\Product\Save"/>
+    <preference for ="Magento\Catalog\Block\Adminhtml\Product" type="Icare\Catalog\Block\Adminhtml\Product"/>
+    <preference for ="Magento\Catalog\Block\Adminhtml\Form\Renderer\Fieldset\Element" type="Icare\Catalog\Block\Adminhtml\Form\Renderer\Fieldset\Element"/>
+    <preference for ="Icare\Catalog\Api\ReviewInterface" type="Icare\Catalog\Model\ReviewManagement"/>
+    <preference for="Magento\Catalog\Model\ResourceModel\Product" type="Icare\Catalog\Model\ResourceModel\Product"/>
+    <preference for="Magento\ProductVideo\Controller\Adminhtml\Product\Gallery\RetrieveImage" type="Icare\Catalog\Controller\Adminhtml\Product\Gallery\RetrieveImage"/>
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Gallery\Content" type="Icare\Catalog\Block\Adminhtml\Product\Helper\Form\Gallery\Content"/>
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Price" type="Icare\Catalog\Block\Adminhtml\Product\Helper\Form\Price"/>
+    <preference for="Magento\ProductVideo\Model\Plugin\ExternalVideoEntryProcessor" type="Icare\Catalog\Model\Plugin\ExternalVideoEntryProcessor"/>
+
+    <preference for="Icare\Catalog\Api\Data\BestSellerParamInterface" type="Icare\Catalog\Model\BestSellerParam" />
+    <preference for="Icare\Catalog\Api\Data\NewestProductParamInterface" type="Icare\Catalog\Model\NewestProductParam" />
+</config>

@@ -1,0 +1,70 @@
+<div data-bind="html: content, attr: {class: element.cssclass ? element.cssclass : 'admin__scope-old'}"
+     class="admin__scope-old">
+    <div class="fieldset-wrapper customer-information">
+        <div class="fieldset-wrapper-title">
+            <span class="title"><?php echo __('Installment Information') ?></span>
+        </div>
+        <?php if ($block->getInstallment()): ?>
+            <?php
+            $installment = $block->getInstallment()->installment;
+            $savingAccount = $block->getInstallment()->savingsAccount;
+            ?>
+            <table class="admin__table-secondary">
+                <tr>
+                    <td><?php echo __('Saving Account Number'); ?></td>
+                    <td><?php echo $savingAccount->accountNo ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo __('Total Loan Amount'); ?></td>
+                    <td><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($installment->totalLoanAmount, false, false) . ' ' . $savingAccount->currency->code ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo __('Total Loan Balance'); ?></td>
+                    <td><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($installment->totalLoanBalance, false, false) . ' ' . $savingAccount->currency->code ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo __('Total Paid Amount') ?></td>
+                    <td><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($installment->totalPaidAmount, false, false) . ' ' . $savingAccount->currency->code ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo __('Total Using Credit Amount') ?></td>
+                    <td><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($installment->totalUsingCreditAmount, false, false) . ' ' . $savingAccount->currency->code ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo __('Total Using Due Limit Amount') ?></td>
+                    <td><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($installment->totalUsingDueAmount, false, false) . ' ' . $savingAccount->currency->code ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo __('Saving Account Balance') ?></td>
+                    <td><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($savingAccount->summary->accountBalance, false, false) . ' ' . $savingAccount->currency->code ?></td>
+                </tr>
+            </table>
+        <?php else: ?>
+            <p><?php echo __('There is no active installment.') ?></p>
+        <?php endif; ?>
+
+    </div>
+</div>
+<div data-bind="html: content, attr: {class: element.cssclass ? element.cssclass : 'admin__scope-old'}"
+     class="admin__scope-old">
+    <div class="fieldset-wrapper customer-information">
+        <div class="fieldset-wrapper-title">
+            <span class="title"><?php echo __('Credit infromation') ?></span>
+        </div>
+        <?php if ($credit = $block->getCreditDueLimit()): ?>
+            <table class="admin__table-secondary">
+                <tr>
+                    <td><?php echo __('Credit Limit') ?></td>
+                    <td><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($credit['credit_limit'], false, false); ?> <?php echo $credit['currency_code'] ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo __('Due Limit') ?></td>
+                    <td><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($credit['due_limit'], false, false); ?> <?php echo $credit['currency_code'] ?></td>
+                </tr>
+            </table>
+        <?php else: ?>
+            <p><?php echo __('There is no active Credit.') ?></p>
+        <?php endif; ?>
+
+    </div>
+</div>

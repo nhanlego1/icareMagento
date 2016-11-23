@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: nhan_nguyen
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Icare_Deposit::customers_deposit" title="Deposit Receivable" module="Icare_Deposit" sortOrder="50" parent="Magento_Customer::customer" action="icare/deposit/" resource="Icare_Deposit::customer_deposit"/>
+    </menu>
+</config>

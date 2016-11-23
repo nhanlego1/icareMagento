@@ -1,0 +1,13 @@
+<?php
+$auto_confirm = $block->isAutoconfirm();
+?>
+<?php if($auto_confirm):?>
+<div class="admin__page-section-item-title" style="margin-top: 20px">
+    <span class="title"><?=__("Auto confirmation")?></span>
+</div>
+<div class="admin__page-section-item-content">
+    <?=__("Using status : ")?>
+    <strong><?=__('Yes')?></strong>
+
+</div>
+<?php endif;?>

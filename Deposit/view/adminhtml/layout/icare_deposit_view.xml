@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: nhan_nguyen
+  ~ Modified by: longnv
+  -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <body>
+        <referenceContainer name="admin.scope.col.wrap" htmlClass="admin__old" />
+        <referenceContainer name="content">
+            <block class="Icare\Deposit\Block\Adminhtml\View\Detail" name="deposit_view" template="view/detail.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Icare\Deposit\Block\Adminhtml\View\Tabs" name="deposit_detail_tabs" >
+                <block name="deposit_make_payment" class="Icare\Deposit\Block\Adminhtml\View\Tabs\MakePayment" />
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">deposit_payment</argument>
+                    <argument name="block" xsi:type="string">deposit_make_payment</argument>
+                </action>
+                <block name="deposit_history" class="Icare\Deposit\Block\Adminhtml\View\Tabs\History">
+                    <uiComponent name="icare_deposit_payment_listing"/>
+                </block>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">deposit_history_tab</argument>
+                    <argument name="block" xsi:type="string">deposit_history</argument>
+                </action>
+                <block name="deposit_receivable" class="Icare\Deposit\Block\Adminhtml\View\Tabs\Receivable">
+
+                </block>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">deposit_receivable_tab</argument>
+                    <argument name="block" xsi:type="string">deposit_receivable</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="deposit_receivable">
+            <uiComponent name="icare_deposit_user_listing"/>
+        </referenceBlock>
+
+    </body>
+</page>

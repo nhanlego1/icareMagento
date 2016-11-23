@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Icare\Helpdesk\Api\HelpdeskInterface" type="Icare\Helpdesk\Model\Helpdesk"/>
+    <preference for="Icare\Helpdesk\Api\Data\TicketInfoInterface" type="Icare\Helpdesk\Model\TicketInfo"/>
+    <preference for="Icare\Helpdesk\Api\Data\TicketReplyInfoInterface" type="Icare\Helpdesk\Model\TicketReplyInfo"/>
+    <virtualType name="Magebuzz\Helpdesk\Model\ResourceModel\Ticket\Grid\Collection" type="Icare\Helpdesk\Model\ResourceModel\Ticket\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mb_ticket</argument>
+            <argument name="resourceModel" xsi:type="string">Magebuzz\Helpdesk\Model\ResourceModel\Ticket</argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="Magebuzz\Helpdesk\Helper\Data" type="Icare\Helpdesk\Helper\Data"/>
+    <preference for="Magebuzz\Helpdesk\Block\Adminhtml\Ticket\Edit\Tab\General\Left" type="Icare\Helpdesk\Block\Adminhtml\Ticket\Edit\Tab\General\Left"/>
+    <preference for="Magebuzz\Helpdesk\Block\Adminhtml\Ticket\Edit" type="Icare\Helpdesk\Block\Adminhtml\Ticket\Edit"/>
+    <preference for="Magebuzz\Helpdesk\Block\Adminhtml\Ticket\Edit\Tab\General\Main\ListActions" type="Icare\Helpdesk\Block\Adminhtml\Ticket\Edit\Tab\General\Main\ListActions"/>
+    <preference for="Magebuzz\Helpdesk\Controller\Adminhtml\Ticket\Save" type="Icare\Helpdesk\Controller\Adminhtml\Ticket\Save"/>
+</config>

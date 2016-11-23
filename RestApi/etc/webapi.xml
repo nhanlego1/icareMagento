@@ -1,0 +1,473 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:icare:module:Magento_Webapi:etc/webapi.xsd">
+	<!-- order -->
+	
+	<route url="/icare/order/history/:orderId" method="GET">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="historyOrder"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+
+    <route url="/icare/order/address/shipping" method="POST">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="shippingAddressOrder"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/icare/customer/address/shipping" method="POST">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="shippingAddressCustomerAdd"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/icare/customer/shipping/:orderId" method="GET">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="shippingAddressCustomer"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+    <route url="/icare/shipping/customer/:customerId" method="GET">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="customerShippingAddress"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/icare/preorder/tracking" method="POST">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="preorderTracking"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+    
+	<route url="/icare/order/list" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="getOrderList"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+    
+    <route url="/icare/order/customer/list" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="getOrderListByCustomerIdV4"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+    
+    <route url="/icare/order/detail/:orderIncrementId" method="GET">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="getOrderDetailV3"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+    
+    <route url="/icare/order/:orderNo/:action" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="actionOrder"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order"/>
+        </resources>
+    </route>
+    
+    <route url="/icare/order/calculate" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="calculateOrderInfo"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+	
+	<route url="/icare/order/add" method="POST">
+        <service class="Icare\IcareOrderApi\Api\IcareOrderInterface" method="placeOrderV6"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+    
+    <route url="/icare/order/history/:orderId" method="GET">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="historyOrder"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+
+    <route url="/icare/order/address/shipping" method="POST">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="shippingAddressOrder"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/icare/customer/address/shipping" method="POST">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="shippingAddressCustomerAdd"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/icare/customer/shipping/:orderId" method="GET">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="shippingAddressCustomer"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+    <route url="/icare/shipping/customer/:customerId" method="GET">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="customerShippingAddress"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+
+    <route url="/icare/preorder/tracking" method="POST">
+        <service class="Icare\Sales\Api\SalesOrderInterface" method="preorderTracking"/>
+        <resources>
+            <resource ref="Icare_IcareOrderApi::Order" />
+        </resources>
+    </route>
+    
+    <!-- Customer, User -->
+    <route url="/icare/customer/search_by_telephone" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="getListByPhone"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    
+    <route url="/icare/customer/search_by_social_id" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="getListBySocialId"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    
+    <route url="/icare/customer/login" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="getListCustomer"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    
+    <route url="/icare/customer/social/login" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="loginBySocialId"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    
+    <route url="/user/login" method="POST">
+        <service class="Icare\User\Api\UserApiInterface" method="login"/>
+        <resources>
+            <resource ref="Icare_User::User"/>
+        </resources>
+    </route>
+    
+    <route url="/icare/customer/credit" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="customerCredit"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    
+    
+    <route url="/icare/content" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="customerContent"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/icare/customer/add" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="customerCreate"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/icare/customer/deposit" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="addDepositToCustomer"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/icare/center/list" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="getICareCenter"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    
+    <!-- Product -->
+    <route url="/icare/product/search" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="listProductSearchV3"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    <route url="/icare/product/contentofweek/:storeId" method="GET">
+        <service class="Icare\Catalog\Api\ProductInterface" method="getContentOfWeek"/>
+        <resources>
+            <resource ref="Icare_Catalog::Catalog"/>
+        </resources>
+    </route>
+    
+    <route url="/icare/product/saveNetSuiteProduct" method="POST">
+    	<service class="Icare\Catalog\Api\ProductInterface" method="saveNetSuiteProduct"/>
+    	<!-- Wait for Oauth module implementation -->
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <!-- capture -->
+    <route url="/icare/customer/capture/add" method="POST">
+        <service class="Icare\Capture\Api\CaptureInterface" method="addCustomer"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+
+    </route>
+
+    <route url="/icare/customer/capture/:customerId" method="GET">
+        <service class="Icare\Capture\Api\CaptureInterface" method="customerInfo"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    <route url="/icare/order/capture/:orderId" method="GET">
+        <service class="Icare\Capture\Api\CaptureInterface" method="orderInfo"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    
+    <!-- CMS -->
+    <route url="/icare/cms/page/list" method="POST">
+        <service class="Icare\Cms\Api\PageInterface" method="pageList"/>
+        <resources>
+            <resource ref="Magento_Cms::page"/>
+        </resources>
+
+    </route>
+
+    <route url="/icare/cms/page/vote" method="POST">
+        <service class="Icare\Cms\Api\PageInterface" method="pageVote"/>
+        <resources>
+            <resource ref="Magento_Cms::page"/>
+        </resources>
+
+    </route>
+    
+    <!-- Custom -->
+    <route url="/icare/custom/site/search" method="POST">
+        <service class="Icare\Custom\Api\CustomApiInterface" method="getSiteList"/>
+        <resources>
+            <!--Permission Magento_Backend::store-->
+            <resource ref="Magento_Backend::store"/>
+        </resources>
+    </route>
+
+    <route url="/icare/country/list" method="POST">
+        <service class="Icare\Custom\Api\CustomApiInterface" method="getCountriesAndStates"/>
+        <resources>
+            <!--Permission Magento_Backend::store-->
+            <resource ref="Magento_Backend::store"/>
+        </resources>
+    </route>
+    
+    <!-- Deposit Report -->
+    <route url="/icare/deposit/search_by_user" method="POST">
+        <service class="Icare\Deposit\Api\DepositApiInterface" method="getListByUser"/>
+        <resources>
+            <resource ref="Icare_Deposit::Deposit"/>
+        </resources>
+    </route>
+    
+    <!-- GPS Tracking -->
+    <route url="/icare/gps/track" method="POST">
+        <service class="Icare\Gps\Api\GpsInterface" method="gpsTrack"/>
+        <resources>
+            <resource ref="Icare_Gps::gps"/>
+        </resources>
+
+    </route>
+    
+    <!-- Helpdesk ticket -->
+    <route url="/icare/helpdesk/customer/:customerId" method="GET">
+        <service class="Icare\Helpdesk\Api\HelpdeskInterface" method="getListByCustomer"/>
+        <resources>
+            <resource ref="Icare_Helpdesk::Helpdesk"/>
+        </resources>
+    </route>
+
+    <route url="/icare/helpdesk/order/:orderId" method="GET">
+        <service class="Icare\Helpdesk\Api\HelpdeskInterface" method="getListByOrder"/>
+        <resources>
+            <resource ref="Icare_Helpdesk::Helpdesk"/>
+        </resources>
+    </route>
+
+    <route url="/icare/helpdesk/ticket/:ticketId" method="GET">
+        <service class="Icare\Helpdesk\Api\HelpdeskInterface" method="getTicket"/>
+        <resources>
+            <resource ref="Icare_Helpdesk::Helpdesk"/>
+        </resources>
+    </route>
+
+    <route url="/icare/helpdesk/user/:userId" method="GET">
+        <service class="Icare\Helpdesk\Api\HelpdeskInterface" method="getListByUser"/>
+        <resources>
+            <resource ref="Icare_Helpdesk::Helpdesk"/>
+        </resources>
+    </route>
+
+    <route url="/icare/helpdesk/ticket/create" method="POST">
+        <service class="Icare\Helpdesk\Api\HelpdeskInterface" method="submitTicketV2"/>
+        <resources>
+            <resource ref="Icare_Helpdesk::Helpdesk"/>
+        </resources>
+    </route>
+
+    <route url="/icare/helpdesk/ticket/reply" method="POST">
+        <service class="Icare\Helpdesk\Api\HelpdeskInterface" method="submitTicketReplyV2"/>
+        <resources>
+            <resource ref="Icare_Helpdesk::Helpdesk"/>
+        </resources>
+    </route>
+    
+    <!--Security actions-->
+    <route url="/icare/m/security/auth" method="POST">
+        <service class="Icare\MobileSecurity\Api\AuthenticateInterface" method="authenticate"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+    
+    <route url="/icare/m/security/verify_pincode" method="POST">
+        <service class="Icare\MobileSecurity\Api\AuthenticateInterface" method="verifyPincodeForConfirm"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+    
+    <!--Register Actions-->
+    <route url="/icare/m/security/register" method="POST">
+        <service class="Icare\MobileSecurity\Api\RegisterInterface" method="register"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+    <route url="/icare/m/security/update" method="POST">
+        <service class="Icare\MobileSecurity\Api\RegisterInterface" method="update"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+    <route url="/icare/m/security/reset" method="POST">
+        <service class="Icare\MobileSecurity\Api\RegisterInterface" method="reset"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+    
+    <!-- Variable -->
+    <route url="/icare/variable" method="POST">
+        <service class="Icare\Variable\Api\VariableInterface" method="retrieveVariables"/>
+        <resources>
+            <resource ref="Icare_Variable::variable"/>
+        </resources>
+    </route>
+    <route url="/icare/variable/search_by_code" method="POST">
+        <service class="Icare\Variable\Api\VariableInterface" method="getListByCode"/>
+        <resources>
+            <resource ref="Icare_Variable::variable"/>
+        </resources>
+    </route>
+    
+    <!-- review product  -->
+    <route url="/review/reviews/product" method="POST">
+        <service class="Ipragmatech\Ipreview\Api\ReviewInterface" method="getReviewsList"/>
+        <resources>
+            <resource ref="Icare_Catalog::Catalog"/>
+        </resources>
+    </route>
+    <route url="/review/mine/post" method="POST">
+        <service class="Ipragmatech\Ipreview\Api\ReviewInterface" method="writeReviews"/>
+        <resources>
+            <resource ref="Icare_Catalog::Catalog"/>
+        </resources>
+        <data>
+            <parameter name="customer_id" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/review/post" method="POST">
+        <service class="Ipragmatech\Ipreview\Api\ReviewInterface" method="writeReviews"/>
+        <resources>
+            <resource ref="Icare_Catalog::Catalog"/>
+        </resources>
+    </route>
+    
+    <!-- Wish list -->
+	<route url="/icare/wishlist/items" method="GET">
+        <service class="Icare\Customer\Api\WishlistManagementInterface" method="getWishlistForCustomer"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    <route url="/icare/wishlist/info" method="GET">
+        <service class="Icare\Customer\Api\WishlistManagementInterface" method="getWishlistInfo"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    <route url="/icare/wishlist/add" method="POST">
+        <service class="Icare\Customer\Api\WishlistManagementInterface" method="addWishlistForCustomer"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    <route url="/icare/wishlist/delete/:wishlistItemId" method="DELETE">
+        <service class="Icare\Customer\Api\WishlistManagementInterface" method="deleteWishlistForCustomer"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    <!--api generate token-->
+    <route url="/icare/m/token/generate" method="POST">
+        <service class="Icare\MobileSecurity\Api\AuthenticateInterface" method="generateToken"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+    <!--api access token-->
+    <route url="/icare/m/token/access" method="POST">
+        <service class="Icare\MobileSecurity\Api\AuthenticateInterface" method="accessToken"/>
+        <resources>
+            <resource ref="Icare_MobileSecurity::all"/>
+        </resources>
+    </route>
+
+    <!--API product bestsellers-->
+    <route url="/icare/product/bestseller" method="POST">
+        <service class="Icare\Catalog\Api\ProductInterface" method="getBestSeller"/>
+        <resources>
+            <resource ref="Icare_Catalog::Catalog" />
+        </resources>
+    </route>
+    <!--API product newest-->
+    <route url="/icare/product/newlist" method="POST">
+        <service class="Icare\Catalog\Api\ProductInterface" method="getNewestProduct"/>
+        <resources>
+            <resource ref="Icare_Catalog::Catalog"/>
+        </resources>
+    </route>
+</routes>

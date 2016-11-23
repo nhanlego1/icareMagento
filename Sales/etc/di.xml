@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid\Collection" type="Icare\Sales\Model\ResourceModel\Order\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="Magento\Sales\Block\Adminhtml\Order\View\History" type="Icare\Sales\Block\Adminhtml\Order\View\History"/>
+    <preference for="Magento\Sales\Block\Adminhtml\Order\Create\Store\Select" type="Icare\Sales\Block\Adminhtml\Order\Create\Store\Select"/>
+    <preference for="Magento\Sales\Controller\Adminhtml\Order\Create\Index" type="Icare\Sales\Controller\Adminhtml\Order\Create\Index"/>
+    <preference for="Magento\Sales\Block\Adminhtml\Order\Create\Messages" type="Icare\Sales\Block\Adminhtml\Order\Create\Messages"/>
+    <preference for="Icare\Sales\Api\SalesOrderInterface" type="Icare\Sales\Model\Order"/>
+    <preference for="Magento\Sales\Block\Adminhtml\Order\View" type="Icare\Sales\Block\Adminhtml\Order\View"/>
+    <preference for="Magento\Sales\Controller\Adminhtml\Order\Create\Save" type="Icare\Sales\Controller\Adminhtml\Order\Create\Save"/>
+    <preference for="Magento\Sales\Controller\Adminhtml\Order\Edit\Save" type="Icare\Sales\Controller\Adminhtml\Order\Edit\Save"/>
+    <preference for="Magento\Sales\Model\ResourceModel\Order\Customer\Collection" type="Icare\Sales\Model\ResourceModel\Order\Customer\Collection"/>
+    <preference for="Magento\Framework\App\Arguments\ValidationState" type="Icare\Sales\Ui\Component\XMLValidator"/>
+    <preference for="Magento\Sales\Block\Adminhtml\Shipment" type="Icare\Sales\Block\Adminhtml\Shipment"/>
+    <preference for="Magento\Sales\Block\Adminhtml\Report\Filter\Form\Order" type="Icare\Sales\Block\Adminhtml\Report\Filter\Form\Order"/>
+	<preference for="Magento\Reports\Block\Adminhtml\Sales\Sales\Grid" type="Icare\Sales\Block\Adminhtml\Report\Sales\Grid"/>
+    <preference for="Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter" type="Icare\Sales\Ui\Component\FulltextFilter"/>
+    <preference for="Magento\Sales\Model\Order\Item" type="Icare\Sales\Model\Order\Item"/>
+
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Shipment\Grid\Collection" type="Icare\Sales\Model\ResourceModel\Order\Shipment\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_shipment_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order\Shipment</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="sales_order_shipment_readytoship_grid_data_source" xsi:type="string">Magento\Sales\Model\ResourceModel\Order\Shipment\Grid\Collection</item>
+                <item name="sales_order_shipment_waitfordeliver_grid_data_source" xsi:type="string">Magento\Sales\Model\ResourceModel\Order\Shipment\Grid\Collection</item>
+                <item name="sales_order_shipment_delivered_grid_data_source" xsi:type="string">Magento\Sales\Model\ResourceModel\Order\Shipment\Grid\Collection</item>
+            	<item name="icare_listing_data_source" xsi:type="string">Icare\Sales\Model\ResourceModel\Grid\ICareCenterCollection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="Magento\Shipping\Block\Adminhtml\View\Form" type="Icare\Sales\Block\Adminhtml\Shipment\ShipmentForm"/>
+
+    <preference for="Magento\Sales\Model\Order\Pdf\AbstractPdf" type="Icare\Sales\Model\Order\Pdf\AbstractPdf"/>
+    <preference for="Magento\Sales\Model\Order\Pdf\Items\AbstractItems" type="Icare\Sales\Model\Order\Pdf\Items\AbstractItems"/>
+
+    <preference for="Magento\Sales\Model\Order\Pdf\Shipment" type="Icare\Sales\Model\Order\Pdf\Shipment"/>
+    <preference for="Magento\Sales\Block\Adminhtml\Order\View\Info" type="Icare\Sales\Block\Adminhtml\Order\View\Info"/>
+
+    <type name="Icare\Sales\Model\ResourceModel\Grid\ICareCenterCollection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">customer_grid_flat</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Customer\Model\ResourceModel\Customer</argument>
+        </arguments>
+    </type>
+
+	<type name="Magento\Framework\Console\CommandList">
+		<arguments>
+			<argument name="commands" xsi:type="array">
+				<item name="aggregate" xsi:type="object">Icare\Sales\Console\Command\AggregateCommand</item>
+			</argument>
+		</arguments>
+	</type>
+
+    <type name="Magento\Sales\Block\Adminhtml\Order\Create\Form">
+        <plugin name="dataOrderConfigEscape" type="Icare\Sales\Plugin\Block\Adminhtml\Order\Create\Form" />
+    </type>
+
+</config>
+

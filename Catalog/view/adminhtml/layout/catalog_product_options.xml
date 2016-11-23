@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <body>
+        <referenceBlock name="admin.product.options">
+            <block class="Icare\Catalog\Block\Adminhtml\Product\Edit\Tab\Options" name="icare.admin.product.options">
+            </block>
+        </referenceBlock>
+    </body>
+</layout>

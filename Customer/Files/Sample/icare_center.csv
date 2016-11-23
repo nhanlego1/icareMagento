@@ -1,0 +1,18 @@
+Internal ID,Name,Name (no hierarchy),Address 1,Address 2,Phone,City,Zip,State/Province,Country,Location Type,Latitude,Longitude,Subsidiary,Parent Name
+16,Ayutthaya,Ayutthaya,Test Addr,,123456701,Ayutthaya,Z00000,Ayutthaya,TH,Warehouse,,,Thailand,
+15,Bangkok,Bangkok,Test Addr,,123456702,Bangkok,Z00000,Bangkok,TH,Warehouse,,,Thailand,
+2,Centre,Centre,Test Addr,,123456703,Da Nang,Z00000,,VN,Warehouse,,,Vietnam,
+6,Centre : DNG,DNG,Test Addr,,123456704,Da Nang,Z00000,,VN,Store,,,Vietnam,Centre
+14,Kandal,Kandal,Test Addr,,123456705,Kandal,Z00000,Kandal,KH,,,,Cambodia,
+17,Manila,Manila,Test Addr,,123456706,Manila,Z00000,Manila,PH,Warehouse,,,Philippines,
+1,North,North,Test Addr,,123456707,Hanoi,Z00000,,VN,Warehouse,,,Vietnam,
+4,North : HNI,HNI,Test Addr,,123456708,Hanoi,Z00000,,VN,Store,,,Vietnam,North
+5,North : HPG,HPG,Test Addr,,123456709,Hai Phong,Z00000,,VN,Store,,,Vietnam,North
+13,PhnomPenh,PhnomPenh,Test Addr,,123456710,PhnomPenh,Z00000,PhnomPenh,KH,,,,Cambodia,
+12,Savannakhet,Savannakhet,Test Addr,,123456711,Savannakhet,Z00000,Savannakhet,LA,,,,Laos,Vientiane
+3,South,South,Test Addr,,123456712,Ho Chi Minh,Z00000,,VN,Warehouse,,,Vietnam,
+7,South : BDG,BDG,Test Addr,,123456713,Binh Duong,Z00000,,VN,,,,Vietnam,South
+8,South : DNI,DNI,Test Addr,,123456714,Dong Nai,Z00000,,VN,,,,Vietnam,South
+9,South : HCM,HCM,Test Addr,,123456715,Ho Chi Minh,Z00000,,VN,,,,Vietnam,South
+10,South : MKD,MKD,Test Addr,,123456716,Can Tho,Z00000,,VN,,,,Vietnam,South
+11,Vientiane,Vientiane,Test Addr,,123456717,Vientiane,Z00000,Vientiane,LA,Warehouse,,,Laos,

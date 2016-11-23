@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:icare:module:Magento_Webapi:etc/webapi.xsd">
+
+    <!-- Managing Cart -->
+    <route url="/V1/icare/customer/search" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="getList"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/V1/icare/customer/login" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="getListCustomer"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/V1/icare/customer/social/login" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="loginBySocialId"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/V1/icare/customer/search_by_telephone" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="getListByPhone"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/V1/icare/customer/search_by_social_id" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="getListBySocialId"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+
+    </route>
+
+    <route url="/V1/icare/customer/searchproduct" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="searchProducts"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/V3/icare/product/search" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="listProductSearchV3"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/V1/icare/customer/credit" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="customerCredit"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/V1/icare/content" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="customerContent"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/V1/icare/customer/add" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="customerCreate"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/V1/icare/customer/deposit" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="addDepositToCustomer"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+
+    <route url="/icare/center/list" method="POST">
+        <service class="Icare\Customer\Api\CustomerInterface" method="getICareCenter"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+
+    </route>
+    
+    <route url="/V1/icare/wishlist/items" method="GET">
+        <service class="Icare\Customer\Api\WishlistManagementInterface" method="getWishlistForCustomer"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    <route url="/V1/icare/wishlist/info" method="GET">
+        <service class="Icare\Customer\Api\WishlistManagementInterface" method="getWishlistInfo"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    <route url="/V1/icare/wishlist/add" method="POST">
+        <service class="Icare\Customer\Api\WishlistManagementInterface" method="addWishlistForCustomer"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    <route url="/V1/icare/wishlist/delete/:wishlistItemId" method="DELETE">
+        <service class="Icare\Customer\Api\WishlistManagementInterface" method="deleteWishlistForCustomer"/>
+        <resources>
+            <resource ref="Icare_Customer::Customer"/>
+        </resources>
+    </route>
+    
+</routes>

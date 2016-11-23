@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    
+    <event name="sales_order_save_before">
+        <observer name="icare_netsuite_order_validator" instance="Icare\NetSuite\Observer\OrderValidator" />
+    </event>
+    
+    <event name="sales_order_save_after">
+        <observer name="icare_netsuite_order_notifier" instance="Icare\NetSuite\Observer\OrderNotification" />
+    </event>
+   
+	<event name="sales_order_shipment_save_after">
+    	<observer name="icare_netsuite_shipment_notifier" instance="Icare\NetSuite\Observer\ShipmentNotification" />
+	</event>
+	
+	<event name="netsuite_message_item_fulfillment">
+		<observer name="icare_netsuite_message_shipment_notifier" instance="Icare\NetSuite\Observer\Message\ItemFulfillment" />
+	</event>
+	
+	<event name="netsuite_message_inventory_item">
+		<observer name="icare_netsuite_message_item_fulfillment" instance="Icare\NetSuite\Observer\Message\InventoryItem" />
+	</event>
+</config>

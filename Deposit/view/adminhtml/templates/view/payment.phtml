@@ -1,0 +1,114 @@
+<?php
+/**
+ * Copyright © 2016 by Mobivi.
+ * Created by Long Nguyen.
+ * User: longnguyen
+ * Date: 05/10/2016
+ * Time: 13:28
+ * @var Icare\Deposit\Model\Payment $payment
+ * @var Icare\Deposit\Block\Adminhtml\Deposit\Payment $block
+ */
+$payment = $block->getPaymentItem();
+
+if(!empty($payment)):
+?>
+
+        <style>
+            .detail-table {
+            .lib-table();
+            .lib-table-bordered();
+            .lib-table-striped();
+            .lib-table-hover();
+            }
+
+            @media only screen and (max-width: @screen__m) {
+                .detail-table {
+                .lib-table-responsive(
+                @_table-background-color-responsive: #cff,
+                @_table-th-background-color-responsive: #ffc,
+                @_reset-table-striped: true,
+                @_reset-table-hover: true
+                );
+                }
+            }
+            .detail-table th {
+                width: 200px;
+                text-align: right;
+                padding-right: 10px;
+                background: #eaeaea;
+                padding: 10px;
+            }
+            .detail-table {
+                min-width: 100%;
+                border: 1px gray solid;
+            }
+            .detail-table td{
+                padding-left: 10px;
+            }
+            .detail-table td, .detail-table th {
+                border: 1px gray solid;
+            }
+        </style>
+<section class="admin__page-section">
+    
+    <div class="admin__page-section-content">
+       <table cellpadding="0" cellspacing="0" class="table detail-table">
+           <tr>
+               <th><?=__('Transaction date')?></th>
+               <td><?=$payment->getData('transaction_date')?></td>
+           </tr>
+           <tr>
+               <?php
+               $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of Object Manager
+               $priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data'); // Instance of Pricing Helper
+
+               ?>
+               <th><?=__('Transaction amount')?></th>
+               <td><?= $block->formatAmount($payment->getData('transaction_amount'), $payment->getData('user_id'))?></td>
+           </tr>
+           <tr>
+               <th><?=__('Payment type')?></th>
+               <td><?=$payment->getData('payment_type')?></td>
+           </tr>
+           <tr>
+               <th><?=__('Account #')?></th>
+               <td><?=$payment->getData('account')?></td>
+           </tr>
+           <tr>
+               <th><?=__('Check #')?></th>
+               <td><?=$payment->getData('check')?></td>
+           </tr>
+           <tr>
+               <th><?=__('Routing code')?></th>
+               <td><?=$payment->getData('routing_code')?></td>
+           </tr>
+           <tr>
+               <th><?=__('Receipt #')?></th>
+               <td><?=$payment->getData('receipt')?></td>
+           </tr>
+           <tr>
+               <th><?=__('Bank #')?></th>
+               <td><?=$payment->getData('bank')?></td>
+           </tr>
+           <tr>
+               <th><?=__('Note')?></th>
+               <td><?=$payment->getData('note')?></td>
+           </tr>
+           <tr>
+               <th><?=__('Received by')?></th>
+               <td><?=$payment->getData('user')->getName()?></td>
+           </tr>
+           <?php if($payment->getData('attach_file')):?>
+           <tr>
+               <th><?=__('Attached file')?></th>
+               <td><a href="<?=$payment->getData('attach_file');?>" target="_blank"><?=__('Download file')?></a></td>
+           </tr>
+           <?php endif;?>
+       </table>
+    </div>
+</section>
+<?php
+else:
+?>
+<h3><?=__('No record found')?></h3>
+<?php endif;?>

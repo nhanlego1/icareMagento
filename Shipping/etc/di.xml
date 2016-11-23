@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="ShippingGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ShippingGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Icare\Shipping\Model\Resource\Shipping\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ShippingGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Icare\Shipping\Model\ResourceModel\Shipping\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">icare_delivery_reason</argument>
+            <argument name="resourceModel" xsi:type="string">Icare\Shipping\Model\ResourceModel\Shipping</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="icare_shipping_listing_data_source" xsi:type="string">Icare\Shipping\Model\ResourceModel\Shipping\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

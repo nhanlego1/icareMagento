@@ -1,0 +1,10 @@
+<?php
+/**
+ * @var Icare\Sales\Block\Adminhtml\Order\Create\AutoConfirmation $block
+ */
+?>
+<span class="title" style="    font-size: 18px;    font-weight: 600;    margin-top: 10px;    display: inline-block;"><?=__("Auto confirmation")?></span>
+<div class="admin__field admin__field-option field-confirmation">
+    <input  type="checkbox" <?=$block->canAutoConfirm() == 1?'':'disabled'?>  id="auto_confirmation" name="order[auto_confirmation]" class="admin__control-checkbox">
+    <label for="auto_confirmation" class="admin__field-label"><?=__('Auto confirmation for this order')?></label>
+</div>

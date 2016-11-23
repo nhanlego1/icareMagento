@@ -1,0 +1,162 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php /* @var $block \Magento\Sales\Block\Adminhtml\Order\Create\Store\Select */ ?>
+<?php
+$website = null;
+$url = null;
+$data = $block->getOrderCustomer();
+if(isset($data)){
+    if(isset($data['website'])){
+        $website = $data['website'];
+    }
+    if(isset($data['url'])){
+        $url = $data['url'];
+    }
+}
+
+?>
+<div class="store-scope form-inline">
+    <div class="admin__fieldset tree-store-scope">
+        <?php if (strpos($url, 'order_create') !== false): ?>
+            <?php $showHelpHint = 0; ?>
+            <?php foreach ($block->getWebsiteCollection() as $_website): ?>
+                <!--check website by customer-->
+                <?php if ($website && $website->getWebsiteId() == $_website->getWebsiteId()): ?>
+
+                    <?php $showWebsite = false; ?>
+                    <?php foreach ($block->getGroupCollection($_website) as $_group): ?>
+                        <?php $showGroup = false; ?>
+
+                        <?php foreach ($block->getStoreCollection($_group) as $_store): ?>
+
+                            <?php if ($showWebsite == false): ?>
+                                <?php $showWebsite = true; ?>
+                                <div class="admin__field field-website_label">
+                                    <label class="admin__field-label" for="">
+                                        <span><?php echo $block->escapeHtml($_website->getName()) ?></span>
+                                    </label>
+                                    <div class="admin__field-control">
+                                        <div class="admin__field admin__field-option">
+                                            <?php if ($showHelpHint == 0):
+                                                echo $block->getHintHtml();
+                                                $showHelpHint = 1;
+                                            endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ($showGroup == false): ?>
+                                <?php $showGroup = true; ?>
+                                <div class="admin__field field-group_label">
+                                    <label class="admin__field-label"
+                                           for=""><span><?php echo $block->escapeHtml($_group->getName()) ?></span></label>
+                                    <div class="admin__field-control"></div>
+                                </div>
+                            <?php endif; ?>
+
+                            <div class="admin__field field-store_label">
+                                <label class="admin__field-label"
+                                       for=""><span><?php echo $block->escapeHtml($_group->getName()) ?></span></label>
+                                <div class="admin__field-control">
+                                    <div class="nested">
+                                        <div class="admin__field admin__field-option">
+                                            <input type="radio" id="store_<?php /* @escapeNotVerified */
+                                            echo $_store->getId() ?>" class="admin__control-radio"
+                                                   onclick="order.setStoreId('<?php /* @escapeNotVerified */
+                                                   echo $_store->getId() ?>')"/>
+                                            <label class="admin__field-label" for="store_<?php /* @escapeNotVerified */
+                                            echo $_store->getId() ?>">
+                                                <?php echo $block->escapeHtml($_store->getName()) ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <?php $showHelpHint = 0; ?>
+            <?php foreach ($block->getWebsiteCollection() as $_website): ?>
+                <?php $showWebsite = false; ?>
+                <?php foreach ($block->getGroupCollection($_website) as $_group): ?>
+                    <?php $showGroup = false; ?>
+
+                    <?php foreach ($block->getStoreCollection($_group) as $_store): ?>
+
+                        <?php if ($showWebsite == false): ?>
+                            <?php $showWebsite = true; ?>
+                            <div class="admin__field field-website_label">
+                                <label class="admin__field-label" for="">
+                                    <span><?php echo $block->escapeHtml($_website->getName()) ?></span>
+                                </label>
+                                <div class="admin__field-control">
+                                    <div class="admin__field admin__field-option">
+                                        <?php if ($showHelpHint == 0):
+                                            echo $block->getHintHtml();
+                                            $showHelpHint = 1;
+                                        endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($showGroup == false): ?>
+                            <?php $showGroup = true; ?>
+                            <div class="admin__field field-group_label">
+                                <label class="admin__field-label"
+                                       for=""><span><?php echo $block->escapeHtml($_group->getName()) ?></span></label>
+                                <div class="admin__field-control"></div>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="admin__field field-store_label">
+                            <label class="admin__field-label"
+                                   for=""><span><?php echo $block->escapeHtml($_group->getName()) ?></span></label>
+                            <div class="admin__field-control">
+                                <div class="nested">
+                                    <div class="admin__field admin__field-option">
+                                        <input type="radio" id="store_<?php /* @escapeNotVerified */
+                                        echo $_store->getId() ?>" class="admin__control-radio"
+                                               onclick="order.setStoreId('<?php /* @escapeNotVerified */
+                                               echo $_store->getId() ?>')"/>
+                                        <label class="admin__field-label" for="store_<?php /* @escapeNotVerified */
+                                        echo $_store->getId() ?>">
+                                            <?php echo $block->escapeHtml($_store->getName()) ?>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+</div>
+<script>
+    require([
+        'jquery',
+        'mage/backend/form',
+        'mage/backend/validation'
+    ], function($){
+       $("#order-customer-selector .admin__data-grid-wrap-static table#sales_order_create_customer_grid_table tbody tr").each(function(){
+           $(this).click(function(){
+               $("#order-store-selector .admin__page-section-title").hide();
+               setTimeout(function(){  location.reload(); }, 100);
+           })
+       })
+
+
+    });
+</script>
+

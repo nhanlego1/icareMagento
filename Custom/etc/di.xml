@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Reports\Model\ResourceModel\Order\Collection" type="Icare\Custom\Model\ResourceModel\Order\Collection"/>
+    <preference for="Icare\Custom\Api\CustomApiInterface" type="Icare\Custom\Model\CustomApiHandler"/>
+    <preference for="Magento\Backend\Model\Url" type="Icare\Custom\Model\Url"/>
+    <preference for="Magento\AdminNotification\Block\Window" type="Icare\Custom\Block\Adminhtml\ICareNotiWindow"/>
+    <preference for="Magento\AdminNotification\Block\System\Messages" type="Icare\Custom\Block\Adminhtml\IcareSysNotification"/>
+    <type name="Icare\Custom\Model\ICareDebugHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Icare\Custom\Model\ICareInfoHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Icare\Custom\Model\ICareExceptionHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Icare\Custom\Model\ICareLogger">
+        <arguments>
+            <argument name="name" xsi:type="string">ICareLogger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="debug" xsi:type="object">Icare\Custom\Model\ICareDebugHandler</item>
+                <item name="exception" xsi:type="object">Icare\Custom\Model\ICareExceptionHandler</item>
+                <item name="system" xsi:type="object">Icare\Custom\Model\ICareInfoHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="Psr\Log\LoggerInterface" type="Icare\Custom\Model\ICareLogger"/>
+
+    <preference for="Magento\Webapi\Model\Rest\Config" type="Icare\Custom\Model\Rest\Config"/>
+
+    <preference for="Magento\Webapi\Controller\Rest\Router\Route" type="Icare\Custom\Controller\Rest\Router\Route"/>
+    
+    <preference for="Magento\Webapi\Model\ServiceMetadata" type="Icare\Custom\Model\ServiceMetadata"/>
+    
+    <type name="Magento\Authorization\Model\CompositeUserContext">
+        <arguments>
+            <argument name="userContexts" xsi:type="array">
+                <item name="adminSessionUserContext" xsi:type="array">
+                    <item name="type" xsi:type="object">Magento\User\Model\Authorization\AdminSessionUserContext</item>
+                    <item name="sortOrder" xsi:type="string">30</item>
+                </item>
+                <item name="customerSessionUserContext" xsi:type="array">
+					<item name="type" xsi:type="object">Magento\Customer\Model\Authorization\CustomerSessionUserContext</item>
+					<item name="sortOrder" xsi:type="string">20</item>
+				</item>
+            </argument>
+        </arguments>
+    </type>
+
+	<preference for="Magento\Webapi\Controller\Rest" type="Icare\Custom\Controller\Rest"/>
+</config>

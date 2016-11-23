@@ -1,0 +1,16 @@
+# STAGING ENVIRONMENT
+AccountId,4517458_SB1
+#BinhPhan
+#OauthToken,985e1195718b9a36230cd1f4d3203a7d6c76c1fa0114a49897a79cb6dc81f301
+#OauthTokenSecret,b15a2a1ac114921a1ec708ac5fe90e6f0fa609073ae1af19f71a4acbb247cbc3
+#NamPham
+OauthToken,21e9ed4ebea5304d5664eef309b7b36a8bdc4899ddefff12907ca61cb1949f66
+OauthTokenSecret,5a858623df62580407f7a3b62aa0c8e4c8b154386a71f947f0d074644cc04802
+#MagentoConsumer
+OauthConsumerKey,e9ecc22d5f78be734cf7cfa357930ceb4334f8b79a8652294f36ea755a8f2eb5
+OauthConsumerSecret,bcc5121f8e57cb5a9812f893c9d7e3d0b781d0d0061d8e864f75a309089b2ed1
+TimeoutInSecs,60
+UrlHelloApi,"https://rest.eu1.netsuite.com/app/site/hosting/restlet.nl?script=289&deploy=1"
+UrlOrderApi,"https://rest.eu1.netsuite.com/app/site/hosting/restlet.nl?script=267&deploy=1"
+
+

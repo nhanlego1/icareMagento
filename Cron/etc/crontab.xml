@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <!--<group id="default" schedule_generate_every="1">-->
+        <!--<job name="example_job" instance="Icare\Cron\Model\ExampleCron" method="showCronRunning">-->
+            <!--<schedule>*/1 * * * * </schedule>-->
+        <!--</job>-->
+    <!--</group>-->
+</config>

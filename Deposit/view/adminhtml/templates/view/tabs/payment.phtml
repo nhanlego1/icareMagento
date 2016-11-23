@@ -1,0 +1,102 @@
+<?php
+/**
+ * @var Icare\Deposit\Block\Adminhtml\View\Tabs\MakePayment $block
+ */
+?>
+<style>
+    .fieldset-left{
+        width:50%;float:left
+    }
+    label.admin__field-label{
+        float: left!important;
+        width: 250px!important;;
+        display: inline-block!important;
+        margin-left: 30px!important;
+        padding-left: 0px!important;
+    }
+    label.admin__field-label span{
+        margin-left: 0px!important;
+        padding-left: 0px!important;
+    }
+    label.admin__field-label span::after{
+        position: relative!important;
+        margin-left: 5px!important;
+    }
+    .admin__field-control{
+        float: left!important;;
+        clear: none!important;;
+        margin-top: -10px!important;
+        min-width: 350px;
+
+    }
+</style>
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?php /* @escapeNotVerified */ echo __('Make new payment') .' (' . __('Total Receivable: ') . $block->getTotalReceivale() . ' )' ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="form-inline">
+            <?php echo $block->getForm()->toHtml() ?>
+        </div>
+    </div>
+</section>
+<script>
+    require([
+        'jquery',
+        'mage/mage',
+        'mage/calendar'
+    ], function($){
+
+        var dataForm = $('#icare_deposit_payment_form');
+        var ignore = null;
+
+        dataForm.mage('validation', {
+            ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+        }).find('input:text').attr('autocomplete', 'off');
+        $('#submit_payment_form').on('click',function(e){
+            var trans_val = $('#transaction_amount').val();
+            $('#transaction_amount').val(trans_val.replace(/,/g,''));
+            $("#icare_deposit_payment_form").validation().submit();
+        });
+        $('#reset_payment_form').on('click',function(e){
+            $("#icare_deposit_payment_form")[0].reset();
+        });
+
+        $('#transaction_date').calendar({
+            showsTime: false,
+            hideIfNoPrevNext: true,
+            buttonText: "<?php echo __('Select Date') ?>",
+            maxDate: new Date(),
+            dateFormat: 'yyyy-mm-dd'
+        });
+
+        $(document).on('keyup focus','#transaction_amount',function(e){
+            var val = $(this).val().replace(/,/g,'');
+            if(val.length>0)
+                $(this).val(number_format(val));
+        });
+    });
+
+    function number_format(number, decimals, dec_point, thousands_sep) {
+        var n = !isFinite(+number) || number > <?=$block->maxTotalTrans?> ? 0 : +number;
+        if(n==0) return '';
+        var
+                prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+                sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+                dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+                toFixedFix = function (n, prec) {
+                    // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+                    var k = Math.pow(10, prec);
+                    return Math.round(n * k) / k;
+                },
+                s = (prec ? toFixedFix(n, prec) : Math.round(n)).toString().split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+        if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+        }
+        return s.join(dec);
+    }
+</script>

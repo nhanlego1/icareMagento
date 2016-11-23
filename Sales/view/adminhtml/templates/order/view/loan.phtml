@@ -1,0 +1,87 @@
+
+<div data-bind="html: content, attr: {class: element.cssclass ? element.cssclass : 'admin__scope-old'}"
+     class="admin__scope-old">
+    <div class="fieldset-wrapper customer-information">
+        <div class="fieldset-wrapper-title">
+            <span class="title"><?php echo __('Loan Information') ?></span>
+        </div>
+    </div>
+    <?php if($block->getLoanData()): ?>
+    <?php $loan = $block->getLoanData(); ?>
+    <table style="font-size: 0.8em!important;" class="admin__table-secondary">
+        <tr>
+            <th>#</th>
+            <th><?php echo __('Days') ?></th>
+            <th><?php echo __('Date') ?></th>
+            <th><?php echo __('Paid Date') ?></th>
+            <th><?php echo __('Principal Due') ?></th>
+            <th><?php echo __('Balance of Loan') ?></th>
+            <th><?php echo __('Interest') ?></th>
+            <th><?php echo __('Fees') ?></th>
+            <th><?php echo __('Penalties') ?></th>
+            <th><?php echo __('Due') ?></th>
+            <th><?php echo __('Paid') ?></th>
+            <th><?php echo __('In Advance') ?></th>
+            <th><?php echo __('Late') ?></th>
+            <th><?php echo __('Outstanding') ?></th>
+        </tr>
+        <?php foreach ($loan->periods as $key => $period): ?>
+            <?php if ($key == 0): ?>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><?php echo $block->convertDateMifos($period->dueDate) ?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><?php echo number_format($period->principalLoanBalanceOutstanding, 2, '.', ',') ?></td>
+                    <td>&nbsp;</td>
+                    <td><?php echo number_format($period->feeChargesDue, 2, '.', ',') ?></td>
+                    <td>&nbsp;</td>
+                    <td><?php echo number_format($period->totalOriginalDueForPeriod, 2, '.', ',') ?></td>
+                    <td><?php echo number_format($period->totalDueForPeriod, 2, '.', ',') ?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            <?php else: ?>
+                <tr>
+                    <td><?php echo $period->period ?></td>
+                    <td><?php echo $period->daysInPeriod ?></td>
+                    <td><?php echo $block->convertDateMifos($period->dueDate) ?></td>
+                    <?php if (isset($period->obligationsMetOnDate)): ?>
+                        <td><?php echo $block->convertDateMifos($period->obligationsMetOnDate) ?></td>
+                    <?php else: ?>
+                        <td>&nbsp;</td>
+                    <?php endif; ?>
+                    <td><?php echo number_format($period->principalDue, 2, '.', ',') ?></td>
+                    <td><?php echo number_format($period->principalLoanBalanceOutstanding, 2, '.', ',') ?></td>
+                    <td><?php echo number_format($period->interestDue, 2, '.', ',') ?></td>
+                    <td><?php echo number_format($period->feeChargesDue, 2, '.', ',') ?></td>
+                    <td><?php echo number_format($period->penaltyChargesDue, 2, '.', ',') ?></td>
+                    <td><?php echo number_format($period->totalDueForPeriod, 2, '.', ',') ?></td>
+                    <td><?php echo number_format($period->totalPaidForPeriod, 2, '.', ',') ?></td>
+                    <td><?php echo number_format($period->totalPaidInAdvanceForPeriod, 2, '.', ',') ?></td>
+                    <td><?php echo number_format($period->totalPaidLateForPeriod, 2, '.', ',') ?></td>
+                    <td><?php echo number_format($period->totalOutstandingForPeriod, 2, '.', ',') ?></td>
+                </tr>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <tr>
+            <td>&nbsp;</td>
+            <td><?php echo $loan->loanTermInDays ?></td>
+            <td><?php echo __('Total') ?></td>
+            <td>&nbsp;</td>
+            <td><?php echo number_format($loan->totalPrincipalDisbursed, 2, '.', ',') ?></td>
+            <td>&nbsp;</td>
+            <td><?php echo number_format($loan->totalInterestCharged, 2, '.', ',') ?></td>
+            <td><?php echo number_format($loan->totalFeeChargesCharged, 2, '.', ',') ?></td>
+            <td><?php echo number_format($loan->totalPenaltyChargesCharged, 2, '.', ',') ?></td>
+            <td><?php echo number_format($loan->totalPrincipalExpected, 2, '.', ',') ?></td>
+            <td><?php echo number_format($loan->totalPrincipalPaid, 2, '.', ',') ?></td>
+            <td><?php echo number_format($loan->totalPaidInAdvance, 2, '.', ',') ?></td>
+            <td><?php echo number_format($loan->totalPaidLate, 2, '.', ',') ?></td>
+            <td><?php echo number_format($loan->totalOutstanding, 2, '.', ',') ?></td>
+        </tr>
+    </table>
+    <?php endif; ?>
+</div>

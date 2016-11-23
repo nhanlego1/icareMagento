@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="order_history">
+            <action method="setTemplate">
+                <argument name="template" translate="true" xsi:type="string">order/view/history.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="payment_additional_info">
+            <block name="saving_account_info" type=""
+                   class="Icare\Sales\Block\Adminhtml\Order\View"
+                   template="order/view/savingaccount.phtml">
+            </block>
+            <block name="auto_confirmation" type=""
+                   class="Icare\Sales\Block\Adminhtml\Order\View"
+                   template="order/view/autoconfirmation.phtml">
+            </block>
+        </referenceBlock>
+        <referenceBlock name="sales_order_tabs">
+            <action method="addTab">
+                <argument name="name" xsi:type="string">order_capture</argument>
+                <argument name="block" xsi:type="string">Icare\Sales\Block\Adminhtml\Order\View\Tab\Capture</argument>
+            </action>
+            <action method="addTab">
+                <argument name="name" xsi:type="string">order_loan</argument>
+                <argument name="block" xsi:type="string">Icare\Sales\Block\Adminhtml\Order\View\Tab\Loan</argument>
+            </action>
+            <action method="addTab">
+                <argument name="name" xsi:type="string">order_ticket</argument>
+                <argument name="block" xsi:type="string">Icare\Sales\Block\Adminhtml\Order\View\Tab\Ticket</argument>
+            </action>
+
+
+        </referenceBlock>
+
+
+    </body>
+</page>

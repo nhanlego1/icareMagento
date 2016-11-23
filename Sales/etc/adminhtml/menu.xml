@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: icare-baonq
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Icare_Sales::catalog_ready_to_ship" title="Ready to ship" module="Icare_Sales" sortOrder="10" parent="Magento_Sales::sales_operation" action="sales/shipment/readytoship" resource="Icare_Sales::ready_to_ship"/>
+        <add id="Icare_Sales::catalog_wait_for_deliver" title="Shipment Tracking" module="Icare_Sales" sortOrder="11" parent="Magento_Sales::sales_operation" action="sales/shipment/waitfordeliver" resource="Icare_Sales::shipment_tracking"/>
+        <add id="Icare_Sales::catalog_delivered" title="Delivery" module="Icare_Sales" sortOrder="12" parent="Magento_Sales::sales_operation" action="sales/shipment/delivered" resource="Icare_Sales::delivered"/>
+
+        <add id="Icare_Sales::catalog_icare_center" title="iCare Center" module="Icare_Sales" sortOrder="12" parent="Magento_Customer::customer" action="sales/icarecenter" resource="Icare_Sales::customer"/>
+
+    </menu>
+</config>

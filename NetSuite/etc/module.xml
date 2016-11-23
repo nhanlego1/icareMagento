@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:icare:framework:Module/etc/module.xsd">
+    <module name="Icare_NetSuite" setup_version="2.0.5">
+    </module>
+</config>

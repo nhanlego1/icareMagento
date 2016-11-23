@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright (c) 2016
+  ~ Created by: longnv
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Icare_Api::Special_Roles" title="Icare Special Roles" sortOrder="1">
+                    <resource id="Icare_Custom::View_AllStore" title="View All Stores" sortOrder="1"/>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

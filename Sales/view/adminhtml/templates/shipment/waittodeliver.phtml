@@ -1,0 +1,240 @@
+<?php
+/**
+ * Copyright (c) 2016
+ * Created by: icare-baonq
+ */
+
+// @codingStandardsIgnoreFile
+/**
+ * @var $block \Icare\Sales\Block\Adminhtml\Shipment\WaitToDeliver
+ */
+?>
+<div id="modal_delivery_result" style="display: none;">
+    <div class="select-option">
+        <form action name="select-delevery" id="select-delivery">
+            <label><?php echo __('Result') ?></label>
+            <select name="choose-type" id="delivery_status" class="local-validation admin__control-select">
+                <option><?php echo __('----choose---') ?></option>
+                <option value="success"><?php echo __('Delivered') ?></option>
+                <option value="fail"><?php echo __('Delivery failed') ?></option>
+            </select>
+        </form>
+    </div>
+    <div class="empty-content">
+        &nbsp;
+    </div>
+    <div class="order-history-block" id="modal_delivery_failed" style="display:none;">
+        <form id="save_update_delivery_failed_form" class="form-update" method="post" enctype="multipart/form-data"
+              action="<?php echo $block->getUpdateDeliveryUrl() ?>">
+            <input name="form_key" type="hidden" value="<?php echo $block->escapeHtml($block->getFormKey()) ?>"/>
+            <input name="is_delivery_success" type="hidden" value="0"/>
+            <div class="admin__field field-row">
+                <label class="admin__field-label">Please choose reason</label>
+                <select id="reason_fail" class="local-validation admin__control-select" name="delivery_failed_reason">
+                    <?php foreach ($block->getListReasonDelivery() as $reason): ?>
+                        <option value="<?php echo $reason ?>"><?php echo __($reason) ?></option>
+                    <?php endforeach; ?>
+                    <option <?php if(!$block->getListReasonDelivery()): ?> selected <?php endif; ?> value="other"><?php echo __('Other') ?></option>
+                </select>
+            </div>
+            <div class="admin__field field-row reason-note" style="display: none">
+                <label class="admin__field-label">Please note reason</label>
+                <div class="admin__field-control">
+                    <textarea class="admin__control-textarea" rows="3" cols="5" id="delivery_failed_reason"
+                              name="reason_detail"></textarea>
+                </div>
+            </div>
+            <div class="admin__field field-row">
+                <button class="action-primary" id="submit_fail"
+                        data-action="confirm"><?php echo __('Confirm') ?></button>
+            </div>
+        </form>
+
+    </div>
+    <div class="order-history-block" id="modal_delivery_success" style="display:none;">
+        <form id="save_update_delivery_success_form" class="form-update" method="post" enctype="multipart/form-data"
+              action="<?php echo $block->getUpdateDeliveryUrl() ?>">
+            <input name="form_key" type="hidden" value="<?php echo $block->escapeHtml($block->getFormKey()) ?>"/>
+            <input name="is_delivery_success" type="hidden" value="1"/>
+            <div class="admin__field field-row">
+                <label class="admin__field-label">Please upload image</label>
+                <div class="admin__field-control">
+                    <div class="hor-scroll">
+                        <table class="admin__table-secondary container" style="width: 50%;">
+                            <tr class="wrapper-tr">
+                                <td class="value">
+                                    <input type="file" name="delivery_upload_file[]"/>
+                                </td>
+                                <td class="label">
+                                    <button onclick="return false;" class="remove">Remove</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <button class="add">Add</button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="admin__field field-row">
+                <button class="action-primary" id="submit_success"
+                        data-action="confirm"><?php echo __('Confirm') ?></button>
+            </div>
+        </form>
+    </div>
+    <div class="empty-content">
+        &nbsp;
+    </div>
+</div>
+<script>
+    require([
+        'jquery',
+        'jquery/ui',
+        'Magento_Ui/js/modal/modal'
+    ], function ($) {
+
+        clickDeliveryFailed = function (shipment_id) {
+            var self = this;
+            self.shipment_id = shipment_id;
+            $('<div />').html($('#modal_delivery_failed').html())
+                .modal({
+                    title: 'Delivery Failed',
+                    autoOpen: true,
+                    closed: function () {
+                        // on close
+                    },
+                    open: function () {
+                        alert(this.element.find('.add'));
+                    },
+                    buttons: [{
+                        text: 'Confirm',
+                        attr: {
+                            'data-action': 'confirm'
+                        },
+                        'class': 'action-primary',
+                        click: function (e) {
+                            var form = this.element.find('#save_update_delivery_failed_form');
+                            form.prop('action', form.prop('action') + '?shipmentId=' + self.shipment_id);
+                            $(form).submit();
+                        }
+                    }]
+                });
+        },
+            clickDeliverySuccess = function (shipment_id) {
+                var self = this;
+                self.shipment_id = shipment_id;
+                $('<div />').html($('#modal_delivery_success').html())
+                    .modal({
+                        title: 'Delivery Success',
+                        autoOpen: true,
+                        closed: function () {
+                            // on close
+                        },
+                        opened: function () {
+
+                            $('.add').click(function () {
+                                var wrapper = "<tr class='wrapper-tr'>" +
+                                    "<td class='value'><input type='file' name='delivery_upload_file[]'></td>" +
+                                    "<td class='label'><button class='remove'>Remove</button></td>" +
+                                    "</tr>";
+                                $(wrapper).find('.remove').on('click', function () {
+                                    $(this).parent('.wrapper-tr').remove();
+                                    return false;
+                                });
+                                $(wrapper).appendTo('.container');
+                                $('.container').on('click', 'button.remove', function () {
+                                    if ($('.wrapper-tr').length > 1) {
+                                        $(this).parents('.wrapper-tr').remove();
+                                    } else {
+                                        alert('at least one image need to be selected');
+                                    }
+                                    return false;
+                                });
+                                return false;
+                            });
+                        },
+                        buttons: [{
+                            text: 'Confirm',
+                            attr: {
+                                'data-action': 'confirm'
+                            },
+                            'class': 'action-primary',
+                            click: function (e) {
+                                var form = this.element.find('#save_update_delivery_success_form');
+                                form.prop('action', form.prop('action') + '?shipmentId=' + self.shipment_id);
+                                $(form).submit();
+
+                            }
+                        }]
+                    });
+            },
+            clickDeliveryResult = function (shipment_id) {
+                var self = this;
+                self.shipment_id = shipment_id;
+                $('<div />').html($('#modal_delivery_result').html())
+                    .modal({
+                        title: 'Delivery Result',
+                        autoOpen: true,
+                        closed: function () {
+                            // on close
+                        },
+                        opened: function () {
+                            //add action for form
+                            $("div#modal_delivery_success.order-history-block").hide();
+                            $("div#modal_delivery_failed.order-history-block").hide();
+                            $("form#save_update_delivery_success_form").attr('action',$("form#save_update_delivery_success_form").attr('action') +'?shipmentId=' + self.shipment_id);
+                            $("form#save_update_delivery_failed_form").attr('action',$("form#save_update_delivery_success_form").attr('action') +'?shipmentId=' + self.shipment_id);
+                            //add for add
+                            $('.add').click(function () {
+                                var wrapper = "<tr class='wrapper-tr'>" +
+                                    "<td class='value'><input type='file' name='delivery_upload_file[]'></td>" +
+                                    "<td class='label'><button class='remove'>Remove</button></td>" +
+                                    "</tr>";
+                                $(wrapper).find('.remove').on('click', function () {
+                                    $(this).parent('.wrapper-tr').remove();
+                                    return false;
+                                });
+                                $(wrapper).appendTo('.container');
+                                $('.container').on('click', 'button.remove', function () {
+                                    if ($('.wrapper-tr').length > 1) {
+                                        $(this).parents('.wrapper-tr').remove();
+                                    } else {
+                                        alert('at least one image need to be selected');
+                                    }
+                                    return false;
+                                });
+                                return false;
+                            });
+                            $("select#delivery_status").change(function () {
+
+                                if ($(this).val() == 'success') {
+                                    $("div#modal_delivery_success.order-history-block").show();
+                                    $("div#modal_delivery_failed.order-history-block").hide();
+                                }
+                                else if ($(this).val() == 'fail') {
+                                    $("div#modal_delivery_success.order-history-block").hide();
+                                    $("div#modal_delivery_failed.order-history-block").show();
+                                } else {
+                                    $("div#modal_delivery_success.order-history-block").hide();
+                                    $("div#modal_delivery_failed.order-history-block").hide();
+                                }
+                            });
+                            //check other to show note
+                            if($("select#reason_fail").val() == 'other'){
+                                $(".reason-note").show();
+                            }
+                            $("select#reason_fail").change(function () {
+                                if ($(this).val() == 'other') {
+                                    $(".reason-note").show();
+                                } else {
+                                    $(".reason-note").hide();
+                                }
+                            });
+
+                        },
+                        buttons: []
+                    });
+            }
+
+
+    });
+</script>

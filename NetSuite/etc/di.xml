@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:icare:framework:ObjectManager/etc/config.xsd">
+    <preference for="Icare\NetSuite\Helper\Client\NetSuiteClientInterface" type="Icare\NetSuite\Helper\Client\NetSuiteSQS"/>
+	<preference for="Icare\NetSuite\Helper\Client\NetSuiteQueueInterface" type="Icare\NetSuite\Helper\Client\NetSuiteSQS"/>
+	
+	<type name="Magento\Framework\Console\CommandList">
+		<arguments>
+			<argument name="commands" xsi:type="array">
+				<item name="poll_sqs" xsi:type="object">Icare\NetSuite\Console\Command\PollSqsCommand</item>
+				<item name="receive" xsi:type="object">Icare\NetSuite\Console\Command\ReceiveCommand</item>
+			</argument>
+		</arguments>
+	</type>
+</config>
